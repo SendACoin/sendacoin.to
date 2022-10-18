@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1236px" height="225px" viewBox="0 0 1236 225" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>sendacoin</title>
+    <defs>
+        <path d="M99.5,141 C127.39038,141 150,119.957383 150,94 C150,68.0426168 127.39038,47 99.5,47 C90.8090444,47 82.6308587,49.0432709 75.4897786,52.6418173 C59.7142263,60.591463 49,76.1312289 49,94 C49,119.957383 71.6096201,141 99.5,141 Z" id="path-1"></path>
+        <filter x="-0.5%" y="-0.5%" width="101.0%" height="101.1%" filterUnits="objectBoundingBox" id="filter-2">
+            <feGaussianBlur stdDeviation="0.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
+            <feOffset dx="0" dy="0" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
+            <feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowInnerInner1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon" transform="translate(0.000000, 14.000000)">
+            <rect id="Rectangle" x="0" y="0" width="205" height="197"></rect>
+            <ellipse id="Oval" fill="#FFC546" cx="99" cy="94" rx="81" ry="75"></ellipse>
+            <rect id="Rectangle" fill="#FFC546" x="95" y="89" width="85" height="80" rx="8"></rect>
+            <g id="Oval">
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            </g>
+        </g>
+        <text id="send-a-coin" font-family="ArialRoundedMTBold, Arial Rounded MT Bold" font-size="180" font-weight="normal" fill="#212121">
+            <tspan x="217.055664" y="158">send a coin</tspan>
+        </text>
+    </g>
+</svg>
