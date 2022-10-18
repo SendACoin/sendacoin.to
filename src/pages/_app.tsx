@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
 			>
 				<RouterTransition />
 				<WagmiConfig client={wagmiClient}>
-					<RainbowKitProvider chains={chains}>
+					<RainbowKitProvider chains={chains} modalSize="compact">
 						<Layout>
 							<Component {...pageProps} />
 						</Layout>
