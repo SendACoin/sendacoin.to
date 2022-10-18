@@ -7,10 +7,12 @@ import dayjs from 'dayjs';
 import { GlobeIcon, TwitterLogoIcon } from '@radix-ui/react-icons';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { formatImageUrl, formatUrl } from '../libs/helpers';
-import Head from 'next/head';
+
 import Settings from '../config';
 import Image from 'next/image';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
+import PageTitle from 'components/Layout/PageTitle';
+import Spinner from 'components/Spinner';
 
 dayjs.extend(relativeTime);
 
@@ -82,14 +84,17 @@ const GetPost = ({ id }) => {
 
 	useEffect(() => {
 		if (result && result.data && result.data.publications) {
-			setPost([...result.data.publications.items, ...result.data.publications.items]);
+			setPost(result.data.publications.items);
 		}
 	}, [result]);
 
 	return (
 		<div>
 			{posts.map((post) => (
-				<article key={post.id} className="bg-white rounded-lg p-2 mb-1">
+				<article key={post.id} className="bg-white rounded-lg p-2 mb-1 border">
+					{post.metadata.media ? (
+						<img className="rounded-lg mb-2" src={formatImageUrl(post.metadata.media[0]?.original?.url)} />
+					) : null}
 					<p>{post.metadata.content}</p>
 					<p className="text-sm text-gray-500">{dayjs(post.createdAt).fromNow()}</p>
 				</article>
@@ -113,7 +118,6 @@ const Profile = (props) => {
 
 	useEffect(() => {
 		if (result && router.isReady) {
-			console.log(result);
 			if (result.data == undefined && result.fetching !== true) {
 				router.push('/');
 				toast.error('Profile not found');
@@ -125,86 +129,103 @@ const Profile = (props) => {
 		}
 	}, [result]);
 
-	if (!profile) {
-		return null;
-	}
-
-	console.log(result);
-
 	return (
-		<div className="pt-10 ">
-			<Head>
-				<title>{router.query.profile}</title>
-			</Head>
+		<Spinner loading={profile ? false : true}>
+			{profile ? (
+				<>
+					<div className="pt-8">
+						<PageTitle title={router.query.profile} />
 
-			<div className="mx-auto max-w-screen-xl  relative bg-white border rounded-lg">
-				<div
-					className="bg-gray-100 rounded-t-lg relative "
-					style={{
-						background: `url('${formatImageUrl(
-							profile.coverPicture?.original?.url,
-							Settings.defaultCoverPicture
-						)}')`,
-					}}
-				>
-					<div className="relative avatar_wrapper" style={{ left: '44%', top: '60px' }}>
-						<Image
-							src={`${formatImageUrl(profile.picture?.original?.url, Settings.defaultProfilePicture)}`}
-							alt=""
-							width={125}
-							height={125}
-							className="rounded-full w-32 h-32 border-3"
-						/>
-					</div>
-				</div>
-
-				<div className="text-center mt-16 mb-10">
-					<b className="text-xl">{profile.name}</b>
-					<p className="text-gray-500">{profile.bio}</p>
-
-					<ShowSocialAccounts attributes={profile.attributes} />
-				</div>
-
-				<div className="grid grid-cols-2 gap-5 mb-20 px-5">
-					<section>
-						<Tabs color="gray" variant="pills" defaultValue="feed">
-							<Tabs.List>
-								<Tabs.Tab value="feed">Feed</Tabs.Tab>
-								<Tabs.Tab value="posts">Posts</Tabs.Tab>
-								<Tabs.Tab value="nfts">NFTs</Tabs.Tab>
-							</Tabs.List>
-
-							<Tabs.Panel value="feed" pt="xs">
-								<div className="post bg-gray-50 rounded-lg p-5">Feed - Recent Tx</div>
-							</Tabs.Panel>
-
-							<Tabs.Panel value="posts" pt="xs">
-								<div className="post bg-gray-50 rounded-lg p-5">
-									<GetPost id={profile.id} />
+						<div
+							className="mx-auto max-w-screen-xl  relative bg-white border rounded-lg"
+							style={{ width: '500px' }}
+						>
+							<div
+								className="bg-gray-100 rounded-t-lg relative w-full h-32"
+								style={{
+									background: `url('${formatImageUrl(
+										profile.coverPicture?.original?.url,
+										Settings.defaultCoverPicture
+									)}')`,
+								}}
+							>
+								<div className="absolute avatar_wrapper" style={{ right: '38%', top: '45px' }}>
+									<Image
+										src={`${formatImageUrl(
+											profile.picture?.original?.url,
+											Settings.defaultProfilePicture
+										)}`}
+										alt=""
+										width={125}
+										height={125}
+										className="rounded-full w-32 h-32 border-3"
+									/>
 								</div>
-							</Tabs.Panel>
-						</Tabs>
-					</section>
-					<div className="donation bg-gray-50 rounded-lg p-5">
-						<h4 className="font-bold">Buy a Coffee for {profile.name}</h4>
-
-						<form className="space-y-3 mt-5">
-							<div className="grid grid-cols-12 gap-5">
-								<Select className="col-span-4" label="Coin" data={[]} />
-
-								<NumberInput label="Amount" value={0.1} className="col-span-8" />
 							</div>
 
-							<Textarea placeholder="Your Message" />
+							<div className="text-center mt-14 mb-5">
+								<b className="text-xl">{profile.name}</b>
+								<p className="text-gray-500 text-sm">{profile.bio}</p>
+								<p className="text-gray-500 space-x-5 text-sm mt-2">
+									<span>{profile.stats.totalFollowers} Followers</span>
+									<span>{profile.stats.totalFollowing} Following</span>
+								</p>
 
-							<Button variant="outline" color="yellow">
-								Submit
-							</Button>
-						</form>
+								<ShowSocialAccounts attributes={profile.attributes} />
+							</div>
+
+							<div className="gap-5 mb-8 px-5">
+								<section>
+									<Tabs color="dark" variant="pills" defaultValue="tip">
+										<div className="grid place-items-center">
+											<Tabs.List>
+												<Tabs.Tab value="tip">Tip</Tabs.Tab>
+												<Tabs.Tab value="posts">Posts</Tabs.Tab>
+												<Tabs.Tab value="nfts">NFTs</Tabs.Tab>
+											</Tabs.List>
+										</div>
+
+										<Tabs.Panel value="tip" pt="xs">
+											<div className="donation bg-gray-50 border rounded-lg p-5">
+												<h4 className="font-bold">Buy a Coffee for {profile.name}</h4>
+
+												<form className="space-y-3 mt-5">
+													<div className="grid grid-cols-12 gap-5">
+														<Select className="col-span-4" label="Coin" data={[]} />
+
+														<NumberInput
+															label="Amount"
+															value={0.1}
+															className="col-span-8"
+														/>
+													</div>
+
+													<Textarea placeholder="Your Message" />
+
+													<Button color="dark" variant="outline" fullWidth>
+														Tip
+													</Button>
+												</form>
+											</div>
+										</Tabs.Panel>
+
+										<Tabs.Panel value="feed" pt="xs">
+											<div className="post bg-gray-50 rounded-lg p-5">Feed - Recent Tx</div>
+										</Tabs.Panel>
+
+										<Tabs.Panel value="posts" pt="xs">
+											<div className="post bg-gray-50 rounded-lg p-5">
+												<GetPost id={profile.id} />
+											</div>
+										</Tabs.Panel>
+									</Tabs>
+								</section>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-		</div>
+				</>
+			) : null}
+		</Spinner>
 	);
 };
 

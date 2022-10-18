@@ -27,7 +27,7 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
     "urql": "^3.0.3",
-    "wagmi": "^0.7.5"
+    "wagmi": "^0.5.0"
   },
   "devDependencies": {
     "@types/node": "18.11.0",

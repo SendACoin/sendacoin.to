@@ -20,5 +20,5 @@ export function RouterTransition() {
 		};
 	}, [router.asPath]);
 
-	return <NavigationProgress autoReset={true} />;
+	return <NavigationProgress color={'yellow'} autoReset={true} />;
 }
