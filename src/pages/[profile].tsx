@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 import { useQuery } from 'urql';
-import { GetProfilesQuery, GetPosts } from 'graphql/queries';
+import { GetProfilesQuery, GetPosts, GetNfts } from 'graphql/queries';
 import React, { useEffect, useState } from 'react';
 import { Button, NumberInput, Select, Tabs, Textarea } from '@mantine/core';
 import dayjs from 'dayjs';
 import { GlobeIcon, TwitterLogoIcon } from '@radix-ui/react-icons';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { formatImageUrl, formatUrl } from '../libs/helpers';
+import { formatImageUrl, formatUrl, isEmpty } from '../libs/helpers';
 
 import Settings from '../config';
 import Image from 'next/image';
@@ -90,6 +90,8 @@ const GetPost = ({ id }) => {
 
 	return (
 		<div>
+			{isEmpty(posts) ? <p className="text-gray-500 text-sm">user doesn{"'"}t have a post yet!</p> : null}
+
 			{posts.map((post) => (
 				<article key={post.id} className="bg-white rounded-lg p-2 mb-1 border">
 					{post.metadata.media ? (
@@ -99,6 +101,37 @@ const GetPost = ({ id }) => {
 					<p className="text-sm text-gray-500">{dayjs(post.createdAt).fromNow()}</p>
 				</article>
 			))}
+		</div>
+	);
+};
+const GetNFTs = ({ ownerAddress }) => {
+	const [nfts, setNFT] = useState([]);
+	const [result, reexecuteQuery] = useQuery({
+		query: GetNfts,
+		variables: {
+			address: ownerAddress,
+		},
+	});
+
+	useEffect(() => {
+		if (result && result.data && result.data.nfts) {
+			setNFT(result.data.nfts.items);
+		}
+	}, [result]);
+
+	return (
+		<div>
+			{isEmpty(nfts) ? <p className="text-gray-500 text-sm">user doesn{"'"}t have a NFT yet!</p> : null}
+			<div className="grid grid-cols-2 gap-2">
+				{nfts.map((nft) => (
+					<article key={nft.contractAddress} className="bg-white rounded-lg p-2 mb-1 border">
+						{nft.originalContent.uri ? (
+							<img className="rounded-lg mb-2" src={formatImageUrl(nft.originalContent.uri)} alt="" />
+						) : null}
+						<p className="text-xs">{nft.name}</p>
+					</article>
+				))}
+			</div>
 		</div>
 	);
 };
@@ -133,7 +166,7 @@ const Profile = (props) => {
 		<Spinner loading={profile ? false : true}>
 			{profile ? (
 				<>
-					<div className="pt-8">
+					<div className="pt-8 pb-10">
 						<PageTitle title={router.query.profile} />
 
 						<div
@@ -141,7 +174,7 @@ const Profile = (props) => {
 							style={{ width: '500px' }}
 						>
 							<div
-								className="bg-gray-100 rounded-t-lg relative w-full h-32"
+								className="bg-gray-100 rounded-t-lg relative w-full h-32 "
 								style={{
 									background: `url('${formatImageUrl(
 										profile.coverPicture?.original?.url,
@@ -216,6 +249,11 @@ const Profile = (props) => {
 										<Tabs.Panel value="posts" pt="xs">
 											<div className="post bg-gray-50 rounded-lg p-5">
 												<GetPost id={profile.id} />
+											</div>
+										</Tabs.Panel>
+										<Tabs.Panel value="nfts" pt="xs">
+											<div className="post bg-gray-50 rounded-lg p-5">
+												<GetNFTs ownerAddress={profile.ownedBy} />
 											</div>
 										</Tabs.Panel>
 									</Tabs>
