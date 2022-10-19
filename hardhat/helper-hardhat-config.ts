@@ -1,4 +1,4 @@
-const { ethers } = require('hardhat');
+import { ethers } from 'hardhat';
 
 const networkConfig = {
 	default: {
@@ -31,7 +31,7 @@ const VERIFICATION_BLOCK_CONFIRMATIONS = 6;
 const frontEndContractsFile = '../src/constants/contractAddresses.json';
 const frontEndAbiFile = '../src/constants/abi.json';
 
-module.exports = {
+export {
 	networkConfig,
 	developmentChains,
 	VERIFICATION_BLOCK_CONFIRMATIONS,
