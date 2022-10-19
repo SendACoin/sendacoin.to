@@ -1,3 +1,4 @@
+import { BellIcon, DashboardIcon, EraserIcon, GlobeIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAccount } from 'wagmi';
@@ -12,10 +13,26 @@ const Layout = ({ children }) => {
 	return (
 		<>
 			<div className={router.asPath === '/' ? 'main-section min-h-screen' : 'bg-gray-50 min-h-screen'}>
+				{HeaderVisibleRoutes.includes(router.asPath) && address ? (
+					<div className="grid grid-cols-7 w-full z-50 fixed md:hidden bottom-0 p-1 border-t border-gray-200 bg-white shadow dark:bg-brand-primary ">
+						<MobileNav
+							link="/dashboard"
+							className="col-span-3"
+							active={router.asPath.includes('dashboard')}
+						>
+							<DashboardIcon className="w-5 h-5" />
+						</MobileNav>
+
+						<MobileNav link="/explore" className="col-span-3" active={router.asPath.includes('portfolio')}>
+							<GlobeIcon className="w-5 h-5" />
+						</MobileNav>
+					</div>
+				) : null}
+
 				<div className="mx-auto max-w-screen-xl px-3 md:px-4 sm:px-6 relative ">
 					{HeaderVisibleRoutes.includes(router.asPath) ? (
 						<>
-							<header className="grid grid-cols-3 gap-5">
+							<header className="grid grid-cols-2 md:grid-cols-3 gap-5">
 								<div>
 									<Link href="/" passHref>
 										<a>
@@ -28,8 +45,8 @@ const Layout = ({ children }) => {
 									</Link>
 								</div>
 
-								<div className="grid place-items-start items-center col-span-2">
-									<nav className="flex items-center bg-white border rounded-full px-2 py-2 space-x-2 shadow-sm ml-0 mr-0">
+								<div className="flex justify-end md:justify-start items-center md:col-span-2">
+									<nav className="hidden md:flex items-center bg-white border rounded-full px-2 py-2 space-x-2 shadow-sm ml-0 mr-0">
 										<Link href="/" passHref>
 											<a className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer">
 												Home
@@ -51,6 +68,10 @@ const Layout = ({ children }) => {
 
 										<ConnectButtonLink />
 									</nav>
+
+									<div className="md:hidden">
+										<ConnectButtonLink />
+									</div>
 								</div>
 							</header>
 						</>
@@ -71,6 +92,20 @@ const Layout = ({ children }) => {
 				</div>
 			</div>
 		</>
+	);
+};
+
+const MobileNav = ({ children, link, className = '', active = false }) => {
+	return (
+		<Link as={link} href={link}>
+			<a
+				className={`p-3 ${
+					active ? 'text-gray-900 ' : 'text-gray-400 '
+				}  text-center hover:bg-gray-100  rounded flex items-center justify-center cursor-pointer ${className}`}
+			>
+				{children}
+			</a>
+		</Link>
 	);
 };
 

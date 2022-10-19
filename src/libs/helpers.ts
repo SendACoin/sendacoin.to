@@ -21,3 +21,16 @@ export const formatUrl = (url) => {
     return `https://${url}`;
 
 }
+
+
+export const isEmpty = (n: any) => {
+    if (n == null) return true;
+
+    return !(!!n
+        ? typeof n === 'object'
+            ? Array.isArray(n)
+                ? !!n.length
+                : !!Object.keys(n).length
+            : true
+        : false);
+};

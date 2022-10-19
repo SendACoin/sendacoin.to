@@ -233,3 +233,28 @@ export const GetPosts = gql`
     mimeType
   }
 `
+
+export const GetNfts = gql`
+  query GetNfts($address: EthereumAddress!) {
+    nfts(request: {
+      ownerAddress: $address,
+      limit: 10,
+      chainIds: [1]
+    }) {
+       items {
+        contractName
+        contractAddress
+        symbol
+        name
+        description
+        contentURI
+        originalContent {
+          uri
+          metaType
+        }
+
+       }
+    }
+  }
+
+`
