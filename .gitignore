@@ -2,6 +2,9 @@
 
 # dependencies
 /hardhat/node_modules
+/hardhat/artifacts
+/hardhat/cache
+/hardhat/gas-report.txt
 /node_modules
 /.pnp
 .pnp.js
@@ -26,6 +29,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+/hardhat/.env
 .env.local
 .env.development.local
 .env.test.local
