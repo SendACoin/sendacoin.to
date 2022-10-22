@@ -1,10 +1,10 @@
 import fs from "fs"
 import { ethers, network } from "hardhat"
 
-import { frontEndContractsFile, frontEndAbiFile } from "../helper-hardhat-config"
+import { frontEndContractsFile, frontEndAbiFile, developmentChains } from "../helper-hardhat-config"
 
 const func = async () => {
-    if (process.env.UPDATE_FRONT_END) {
+    if (!developmentChains.includes(network.name) && process.env.UPDATE_FRONT_END) {
         console.log("Writing to front end...")
         await updateContractAddresses()
         await updateAbi()
@@ -19,6 +19,7 @@ async function updateAbi() {
 
 async function updateContractAddresses() {
     const contract = await ethers.getContract("SacPayments")
+
     const contractAddresses = JSON.parse(fs.readFileSync(frontEndContractsFile, "utf8"))
     if (network.config.chainId!.toString() in contractAddresses) {
         if (!contractAddresses[network.config.chainId!.toString()].includes(contract.address)) {

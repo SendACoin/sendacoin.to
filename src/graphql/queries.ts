@@ -1,5 +1,51 @@
 import { gql } from 'urql';
 
+export const RecommendProfiles = gql`
+  query RecommendedProfiles {
+    recommendedProfiles{
+        id
+        name
+        bio
+        picture {
+          ... on MediaSet {
+            original {
+              url
+            }
+          }
+        }
+        handle
+        stats {
+          totalFollowers
+        }
+    }
+  }
+`
+
+export const UserProfile = gql`
+  query UserProfile($request: ProfileQueryRequest!) {
+    profiles(request: $request){
+    items{
+      name
+      handle
+      picture {
+        ... on NftImage {
+        contractAddress
+        tokenId
+        uri
+        verified
+      }
+      ... on MediaSet {
+        original {
+          url
+          mimeType
+        	}
+      	}
+      }
+    }
+    }
+  }
+`
+
 export const GetProfilesQuery = gql`
   query GetProfilesQuery($request: SingleProfileQueryRequest!) {
     profile(request: $request) {
@@ -239,7 +285,7 @@ export const GetNfts = gql`
     nfts(request: {
       ownerAddress: $address,
       limit: 10,
-      chainIds: [1]
+      chainIds: [1,137]
     }) {
        items {
         contractName

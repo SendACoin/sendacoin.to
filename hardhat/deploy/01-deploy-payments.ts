@@ -12,12 +12,12 @@ const func = async ({ getNamedAccounts, deployments }: any) => {
 		args: [],
 		log: true,
 		// we need to wait if on a live network so we can verify properly
-		waitConfirmations: (network.config as any).blockConfirmations || 1,
+		waitConfirmations: (network.config as any).blockConfirmations || 2,
 	});
 
 
-
 	log(`SacPayments (${network.config.chainId}) deployed at ${sacPayments.address}`);
+
 
 	if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
 		await verify(sacPayments.address, []);
@@ -27,5 +27,5 @@ const func = async ({ getNamedAccounts, deployments }: any) => {
 
 export default func;
 
-func.id = "sac_payments_deploy";
+func.id = "sac_payments";
 func.tags = ["all", 'payments'];

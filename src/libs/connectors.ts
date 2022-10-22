@@ -15,7 +15,6 @@ import {
 import { configureChains } from 'wagmi';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
 
-import { infuraProvider } from 'wagmi/providers/infura';
 
 import { chain, createClient } from 'wagmi';
 
@@ -82,21 +81,22 @@ const ftmChain = {
 };
 
 
-const bnbTestNet = {
-    id: 97,
-    name: 'BNB Testnet',
-    network: 'binance',
+const polygonMumbaiTestnet = {
+    id: 80001,
+    name: 'Mumbai Testnet',
+    iconUrl: "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@bea1a9722a8c63169dcc06e86182bf2c55a76bbc/svg/color/matic.svg",
+    network: 'polgon_mumbai',
     nativeCurrency: {
         decimals: 18,
-        name: 'BNB',
-        symbol: 'BNB',
+        name: 'MATIC',
+        symbol: 'MATIC',
     },
     rpcUrls: {
-        default: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+        default: 'https://rpc-mumbai.maticvigil.com/',
     },
     blockExplorers: {
-        default: { name: 'BSCScan', url: 'https://testnet.bscscan.com' },
-        etherscan: { name: 'BSCScan', url: 'https://ftmscan.com/' },
+        default: { name: 'polygonscan', url: 'https://testnet.polygonscan.com' },
+        etherscan: { name: 'polygonscan', url: 'https://polygonscan.com/' },
     },
     testnet: true,
 };
@@ -148,8 +148,8 @@ export const { chains, provider } = configureChains(
     [
         {
             ...chain.polygon,
-            // iconUrl: "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@bea1a9722a8c63169dcc06e86182bf2c55a76bbc/svg/color/matic.svg"
         },
+        polygonMumbaiTestnet
     ],
     [jsonRpcProvider({ rpc: chain => ({ http: chain.rpcUrls.default }) })],
 

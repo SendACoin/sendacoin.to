@@ -9,6 +9,10 @@ dayjs.extend(relativeTime);
 const Profile = () => {
 	const router = useRouter();
 
+	if (!router.query.profile) return null;
+
+	if (!String(router.query.profile).endsWith('.lens')) return 'Invalid lens handle';
+
 	return <LensProfile profileId={router.query.profile} />;
 };
 

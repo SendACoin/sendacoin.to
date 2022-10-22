@@ -1,4 +1,4 @@
-import { GlobeIcon, TwitterLogoIcon } from '@radix-ui/react-icons';
+import { GlobeIcon, Link1Icon, Link2Icon, TwitterLogoIcon } from '@radix-ui/react-icons';
 import { formatUrl } from 'libs/helpers';
 import React from 'react';
 
@@ -17,7 +17,7 @@ const ShowSocialAccounts = ({ attributes = [] }) => {
 										rel="noopener noreferrer"
 										href={`https://twitter.com/${attribute.value}`}
 									>
-										<TwitterLogoIcon />
+										<img src="/assets/images/twitter.svg" className="w-4 h-4" alt="" />
 									</a>
 								),
 								website: (
@@ -27,7 +27,7 @@ const ShowSocialAccounts = ({ attributes = [] }) => {
 										rel="noopener noreferrer"
 										href={`${formatUrl(attribute.value)}`}
 									>
-										<GlobeIcon />
+										<Link2Icon />
 									</a>
 								),
 								app: (

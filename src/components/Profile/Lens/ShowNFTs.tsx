@@ -25,10 +25,12 @@ const ShowNFTs = ({ ownerAddress }) => {
 
 	return (
 		<div>
-			{isEmpty(nfts) ? <p className="text-gray-500 text-sm">user doesn{"'"}t have a NFT yet!</p> : null}
+			{isEmpty(nfts) ? (
+				<p className="text-gray-500 text-center text-sm">user doesn{"'"}t have a NFT yet!</p>
+			) : null}
 			<div className="grid grid-cols-2 gap-2">
 				{nfts.map((nft) => (
-					<article key={nft.contractAddress} className="bg-white rounded-lg p-2 mb-1 border">
+					<article key={nft.contractAddress + nft.name} className="bg-white rounded-lg p-2 mb-1 border">
 						{nft.originalContent.uri ? (
 							<img className="rounded-lg mb-2" src={formatImageUrl(nft.originalContent.uri)} alt="" />
 						) : null}

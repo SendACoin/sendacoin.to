@@ -5,6 +5,7 @@
 /hardhat/artifacts
 /hardhat/cache
 /hardhat/gas-report.txt
+/hardhat/deployments
 /node_modules
 /.pnp
 .pnp.js
