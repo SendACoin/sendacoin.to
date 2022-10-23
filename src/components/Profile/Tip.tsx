@@ -35,8 +35,8 @@ const Tip = ({ name, ownerAddress }) => {
 
 	return (
 		<>
-			<div className="flex justify-between items-center">
-				<h4 className="font-bold">Buy a Coffee {name ? `for ${name}` : null}</h4>
+			<div className="md:flex justify-between items-center">
+				<h4 className="mb-3 md:mb-0 font-bold">Buy a Coffee {name ? `for ${name}` : null}</h4>
 
 				<ConnectButtonLink />
 			</div>

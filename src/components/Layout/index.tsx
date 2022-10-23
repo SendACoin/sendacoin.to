@@ -31,16 +31,16 @@ const Layout = ({ children }) => {
 					</div>
 				) : null}
 
-				<div className="mx-auto max-w-screen-xl px-3 md:px-4 sm:px-6 relative ">
+				<div className="mx-auto max-w-screen-xl px-1 md:px-4 sm:px-6 relative ">
 					{HeaderVisibleRoutes.includes(router.asPath) ? (
 						<>
 							<header className="grid grid-cols-2 md:grid-cols-3 gap-5">
-								<div>
+								<div className="py-5 md:py-0">
 									<Link href="/" passHref>
 										<a>
 											<img
 												src="https://sendacoin.to/assets/images/logo.svg"
-												className="w-32 h-32"
+												className="md:w-32 md:h-32"
 												alt=""
 											/>
 										</a>
@@ -105,7 +105,9 @@ const Layout = ({ children }) => {
 										Donate
 									</a>
 									<Link href="/thanks" passHref>
-										<a className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer">Thanks</a>
+										<a className="hidden md:block px-2 text-gray-500 hover:text-gray-900 cursor-pointer">
+											Thanks
+										</a>
 									</Link>
 									<Link href="/contact" passHref>
 										<a className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer">Contact</a>

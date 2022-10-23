@@ -44,7 +44,7 @@ const Home = () => {
 	return (
 		<>
 			<section className="w-full bg-gradient-to-b min-h-screen">
-				<PageTitle title="Sendacoin - Support creators" />
+				<PageTitle title="Sendacoin - Share Profile ! Collect Tips!" />
 
 				<div className="grid md:grid-cols-2 gap-7 items-center place-items-center">
 					<section>
@@ -58,26 +58,6 @@ const Home = () => {
 								<p className="text-gray-500 text-xs pl-2">Instant Transfer</p>
 							</div>
 						</div>
-
-						<span className="bg-white text-xs md:text-base rounded-full  md:px-5 pl-4 tracking-wider pr-2 py-5 border text-gray-900">
-							https://sendacoin.to/
-							<input
-								type="text"
-								value={handle}
-								onChange={(e) => setHandle(e.target.value)}
-								className="px-1 py-4 text-gray-400"
-								style={{ outline: 0 }}
-								placeholder="your_lens_handle"
-							/>
-							<button
-								onClick={() => {
-									router.push('/' + handle);
-								}}
-								className="bg-gray-900 hover:bg-gray-700 text-white px-2 md:px-8 py-3 rounded-full md:ml-5"
-							>
-								Go
-							</button>
-						</span>
 					</section>
 					<div className="mt-20 grid">
 						<div className="flex -space-x-2 justify-center">
@@ -98,7 +78,7 @@ const Home = () => {
 
 				<RecommendedProfiles />
 			</section>
-			<section className="mb-20 mt-20 md:mt-0">
+			<section className="mb-20 mt-20 md:mt-0 px-5 md:px-0">
 				<h4 className="font-bold text-3xl mb-10">How it works?</h4>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-5">

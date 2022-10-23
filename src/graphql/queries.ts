@@ -304,3 +304,26 @@ export const GetNfts = gql`
   }
 
 `
+
+
+export const GetBlogPost = gql`
+  query GetBlogPost($address: [String!]!) {
+
+      transactions(
+        tags: [
+          {
+            name: "Contributor"
+            values: $address
+          }
+        ]
+        sort: HEIGHT_DESC
+        first: 1
+      ) {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+  }
+`

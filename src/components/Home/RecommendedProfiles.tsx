@@ -22,7 +22,7 @@ const RecommendedProfiles = () => {
 	if (result.fetching || result.data == null) return null;
 
 	return (
-		<div className="mt-14">
+		<div className="mt-14 px-5 md:px-0">
 			<h5 className="mb-5 block">Recommended Profiles</h5>
 
 			<div className="grid md:grid-cols-4 gap-3">
@@ -34,7 +34,7 @@ const RecommendedProfiles = () => {
 								className="rounded-md w-10 h-10 mr-2 object-cover"
 							/>
 							<div className="text-sm">
-								{profile.name}
+								{profile.name ?? profile.handle}
 								<p className="text-xs w-60 text-gray-500 truncate">{profile.bio}</p>
 							</div>
 						</a>

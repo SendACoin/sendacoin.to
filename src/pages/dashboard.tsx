@@ -13,7 +13,7 @@ const StatsCard = ({ label, value }) => {
 	return (
 		<div className="bg-gray-50 border p-2 rounded-lg">
 			<p className="text-sm text-gray-500 mb-1">{label}</p>
-			<b>{value ? String(formatNumber(ethers.utils.formatEther((value as any)._hex))) : null} </b>
+			<b>{value ? String(formatNumber(ethers.utils.formatEther((value as any)._hex))) : '-'} </b>
 			<span className="text-sm text-gray-500">Polygon</span>
 		</div>
 	);
@@ -108,7 +108,7 @@ const Dashboard = () => {
 			<PageTitle title={'Dashboard'} />
 
 			<Card title="Dashboard">
-				<div className="grid grid-cols-5 gap-5 mt-5">
+				<div className="grid md:grid-cols-5 gap-5 mt-5">
 					<StatsCard label="Donated" value={donated} />
 					<StatsCard label="Received" value={received} />
 				</div>
