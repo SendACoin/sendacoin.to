@@ -45,7 +45,6 @@ const ShowSocialAccounts = ({ attributes = [] }) => {
 					</React.Fragment>
 				);
 			})}
-
 			<a
 				className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 px-2 py-2 rounded-lg"
 				target="_BLANK"

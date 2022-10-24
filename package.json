@@ -23,6 +23,7 @@
     "@radix-ui/react-icons": "^1.1.1",
     "@rainbow-me/rainbowkit": "^0.7.2",
     "@vercel/og": "^0.0.19",
+    "boring-avatars": "^1.7.0",
     "dayjs": "^1.11.5",
     "ethers": "^5.7.1",
     "ipfs-http-client": "^58.0.1",

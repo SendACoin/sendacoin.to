@@ -31,7 +31,7 @@ const RecommendedProfiles = () => {
 						<a className="border rounded-lg p-1.5 flex items-center bg-white">
 							<img
 								src={formatImageUrl(profile?.picture?.original?.url)}
-								className="rounded-md w-10 h-10 mr-2 object-cover"
+								className="rounded-md w-10 h-10 mr-2 object-cover bg-gray-50"
 							/>
 							<div className="text-sm">
 								{profile.name ?? profile.handle}

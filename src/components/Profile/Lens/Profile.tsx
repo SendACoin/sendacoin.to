@@ -81,7 +81,7 @@ const LensProfile = ({ profileId }) => {
 										alt=""
 										width={125}
 										height={125}
-										className="rounded-full w-32 h-32 border-3 object-cover	"
+										className="rounded-full w-32 h-32 border-3 object-cover	bg-gray-50"
 									/>
 								</div>
 							</div>
@@ -100,8 +100,7 @@ const LensProfile = ({ profileId }) => {
 									</span>
 									{address ? <ProfileTipsStats ownerAddress={profile.ownedBy} /> : null}
 								</p>
-
-								{address ? <ShowSocialAccounts attributes={profile.attributes} /> : null}
+								<ShowSocialAccounts attributes={profile.attributes} />
 							</div>
 
 							<div className="gap-5 mb-8 px-2 md:px-5">

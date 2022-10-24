@@ -146,9 +146,8 @@ const moonriverChain = {
 
 export const { chains, provider } = configureChains(
     [
-        {
-            ...chain.polygon,
-        },
+        // chain.mainnet,
+        chain.polygon,
         polygonMumbaiTestnet
     ],
     [jsonRpcProvider({ rpc: chain => ({ http: chain.rpcUrls.default }) })],

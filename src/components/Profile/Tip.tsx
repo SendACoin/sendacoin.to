@@ -12,6 +12,9 @@ const Tip = ({ name, ownerAddress }) => {
 
 	const { address, connector } = useAccount();
 
+	console.log('address');
+	console.log(provider);
+
 	const chainId = 80001;
 	const tipAddress = chainId in contractAddresses ? contractAddresses[chainId][0] : null;
 
