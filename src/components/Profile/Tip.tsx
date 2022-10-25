@@ -1,22 +1,19 @@
 import { Button, NumberInput, Textarea } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import ConnectButtonLink from 'components/Layout/ConnectButton';
-import { contractAddresses, abi } from 'constants/index';
+import { abi } from 'constants/index';
 import { useContractWrite, useProvider } from 'wagmi';
 import { ethers } from 'ethers';
 import { useAccount } from 'wagmi';
 import Owner from './Owner';
+import useContractAddress from 'hooks/useContractAddress';
 
 const Tip = ({ name, ownerAddress }) => {
 	const provider = useProvider();
 
 	const { address, connector } = useAccount();
 
-	console.log('address');
-	console.log(provider);
-
-	const chainId = 80001;
-	const tipAddress = chainId in contractAddresses ? contractAddresses[chainId][0] : null;
+	const { contractAddress } = useContractAddress();
 
 	const form = useForm({
 		initialValues: {
@@ -28,7 +25,7 @@ const Tip = ({ name, ownerAddress }) => {
 
 	const contract = useContractWrite({
 		mode: 'recklesslyUnprepared',
-		address: tipAddress,
+		address: contractAddress,
 		abi: abi,
 		functionName: 'tip',
 		args: [ownerAddress, form.values.message],

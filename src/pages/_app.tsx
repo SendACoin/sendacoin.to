@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }) {
 			>
 				<RouterTransition />
 				<WagmiConfig client={wagmiClient}>
-					<RainbowKitProvider chains={chains} modalSize="compact">
+					<RainbowKitProvider chains={chains} modalSize="compact" appInfo={{ appName: 'Sendacoin.to' }}>
 						<Layout>
 							<Component {...pageProps} />
 						</Layout>

@@ -1,14 +1,14 @@
-import { abi, contractAddresses } from 'constants/index';
+import { abi } from 'constants/index';
 import { ethers } from 'ethers';
+import useContractAddress from 'hooks/useContractAddress';
 import { formatNumber } from 'libs/helpers';
 import { useContractRead } from 'wagmi';
 
 const ProfileTipsStats = ({ ownerAddress }) => {
-	const chainId = 80001;
-	const tipAddress = chainId in contractAddresses ? contractAddresses[chainId][0] : null;
+	const { contractAddress } = useContractAddress();
 
 	const { data, isError, isLoading } = useContractRead({
-		address: tipAddress,
+		address: contractAddress,
 		abi: abi,
 		functionName: 'totalDonated',
 		args: [ownerAddress],
@@ -19,7 +19,7 @@ const ProfileTipsStats = ({ ownerAddress }) => {
 		isLoading: isReceivedLoading,
 		isError: isReceivedError,
 	} = useContractRead({
-		address: tipAddress,
+		address: contractAddress,
 		abi: abi,
 		functionName: 'totalReceived',
 		args: [ownerAddress],

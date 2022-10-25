@@ -1,5 +1,5 @@
 import Card from 'components/Layout/Card';
-import { contractAddresses, abi } from 'constants/index';
+import { abi } from 'constants/index';
 import { ethers } from 'ethers';
 import { UserProfile } from 'graphql/queries';
 import { formatNumber, isEmpty, shortenAddress } from 'libs/helpers';
@@ -8,6 +8,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import toast from 'react-hot-toast';
 import { useAccount, useContractRead } from 'wagmi';
 import PageTitle from 'components/Layout/PageTitle';
+import useContractAddress from 'hooks/useContractAddress';
 
 const StatsCard = ({ label, value }) => {
 	return (
@@ -64,9 +65,7 @@ const FeedItem = ({ feed }) => {
 };
 
 const Dashboard = () => {
-	const chainId = 80001;
-
-	const tipAddress = chainId in contractAddresses ? contractAddresses[chainId][0] : null;
+	const { contractAddress } = useContractAddress();
 
 	const { address } = useAccount();
 
@@ -75,7 +74,7 @@ const Dashboard = () => {
 		isError: tipHistoryError,
 		isLoading: tipHistoryLoading,
 	} = useContractRead({
-		address: tipAddress,
+		address: contractAddress,
 		abi: abi,
 		functionName: 'getTipsHistory',
 		args: [address],
@@ -86,7 +85,7 @@ const Dashboard = () => {
 		isError: donatedError,
 		isLoading: donatedLoading,
 	} = useContractRead({
-		address: tipAddress,
+		address: contractAddress,
 		abi: abi,
 		functionName: 'totalDonated',
 		args: [address],
@@ -97,7 +96,7 @@ const Dashboard = () => {
 		isLoading: isReceivedLoading,
 		isError: isReceivedError,
 	} = useContractRead({
-		address: tipAddress,
+		address: contractAddress,
 		abi: abi,
 		functionName: 'totalReceived',
 		args: [address],

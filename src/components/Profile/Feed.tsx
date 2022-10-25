@@ -1,12 +1,13 @@
 import { useProvider } from 'wagmi';
 import { useAccount } from 'wagmi';
-import { contractAddresses, abi } from 'constants/index';
+import { abi } from 'constants/index';
 import { useContractRead } from 'wagmi';
 import { useState } from 'react';
 import { isEmpty, shortenAddress } from 'libs/helpers';
 import { ethers } from 'ethers';
 import { useQuery } from 'urql';
 import { UserProfile } from 'graphql/queries';
+import useContractAddress from 'hooks/useContractAddress';
 
 const FeedItem = ({ feed }) => {
 	const [result, reexecuteQuery] = useQuery({
@@ -43,12 +44,10 @@ const Feed = ({ ownerAddress }) => {
 
 	const provider = useProvider();
 	const { address, connector } = useAccount();
-	const chainId = 80001;
-
-	const tipAddress = chainId in contractAddresses ? contractAddresses[chainId][0] : null;
+	const { contractAddress } = useContractAddress();
 
 	const { data, isError, isLoading } = useContractRead({
-		address: tipAddress,
+		address: contractAddress,
 		abi: abi,
 		functionName: 'getTipsHistory',
 		args: [ownerAddress],
