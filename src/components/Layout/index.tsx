@@ -37,34 +37,38 @@ const Layout = ({ children }) => {
 							<header className="grid grid-cols-2 md:grid-cols-3 gap-5">
 								<div className="py-5 md:py-0">
 									<Link href="/" passHref>
-										<a>
-											<img
-												src="https://sendacoin.to/assets/images/logo.svg"
-												className="w-32 pl-2 md:pl-0  md:w-32 md:h-32"
-												alt=""
-											/>
-										</a>
+										<img
+											src="https://sendacoin.to/assets/images/logo.svg"
+											className="w-32 pl-2 md:pl-0  md:w-32 md:h-32"
+											alt=""
+										/>
 									</Link>
 								</div>
 
 								<div className="flex justify-end md:justify-start items-center md:col-span-2">
 									<nav className="hidden md:flex items-center bg-white border rounded-full px-2 py-2 space-x-2 shadow-sm ml-0 mr-0">
-										<Link href="/" passHref>
-											<a className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer">
-												Home
-											</a>
+										<Link
+											href="/"
+											passHref
+											className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer"
+										>
+											Home
 										</Link>
-										<Link href="/explore" passHref>
-											<a className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer">
-												Explore
-											</a>
+										<Link
+											href="/explore"
+											passHref
+											className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer"
+										>
+											Explore
 										</Link>
 
 										{address ? (
-											<Link href="/dashboard" passHref>
-												<a className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer">
-													Dashboard
-												</a>
+											<Link
+												href="/dashboard"
+												passHref
+												className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer"
+											>
+												Dashboard
 											</Link>
 										) : null}
 
@@ -83,10 +87,12 @@ const Layout = ({ children }) => {
 						<>
 							<footer className="mt-10 py-4 pb-14 text-sm border-t border-gray-100 text-center text-gray-500">
 								<div className="md:space-x-5 flex items-center justify-center">
-									<Link href="/feedback" passHref>
-										<a className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer">
-											Feedback
-										</a>
+									<Link
+										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
+										href="/feedback"
+										passHref
+									>
+										Feedback
 									</Link>
 									<a
 										href="https://discord.gg/F27NTNP9"
@@ -112,13 +118,19 @@ const Layout = ({ children }) => {
 									>
 										Github
 									</a>
-									<Link href="/thanks" passHref>
-										<a className="hidden md:block px-2 text-gray-500 hover:text-gray-900 cursor-pointer">
-											Thanks
-										</a>
+									<Link
+										href="/thanks"
+										passHref
+										className="hidden md:block px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
+									>
+										Thanks
 									</Link>
-									<Link href="/contact" passHref>
-										<a className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer">Contact</a>
+									<Link
+										href="/contact"
+										passHref
+										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
+									>
+										Contact
 									</Link>
 								</div>
 								<p className="py-4 text-xs text-center text-gray-500 flex items-center justify-center">
@@ -149,14 +161,14 @@ const Layout = ({ children }) => {
 
 const MobileNav = ({ children, link, className = '', active = false }) => {
 	return (
-		<Link as={link} href={link}>
-			<a
-				className={`p-3 ${
-					active ? 'text-gray-900 ' : 'text-gray-400 '
-				}  text-center hover:bg-gray-100  rounded flex items-center justify-center cursor-pointer ${className}`}
-			>
-				{children}
-			</a>
+		<Link
+			as={link}
+			href={link}
+			className={`p-3 ${
+				active ? 'text-gray-900 ' : 'text-gray-400 '
+			}  text-center hover:bg-gray-100  rounded flex items-center justify-center cursor-pointer ${className}`}
+		>
+			{children}
 		</Link>
 	);
 };

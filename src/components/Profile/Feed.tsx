@@ -10,7 +10,7 @@ import { UserProfile } from 'graphql/queries';
 import useContractAddress from 'hooks/useContractAddress';
 
 const FeedItem = ({ feed }) => {
-	const [result, reexecuteQuery] = useQuery({
+	const [result] = useQuery({
 		query: UserProfile,
 		variables: {
 			request: {
@@ -25,7 +25,7 @@ const FeedItem = ({ feed }) => {
 				<div className="text-sm">{shortenAddress(feed[0])}</div>
 
 				<span className="text-gray-900 mr-1 bg-gray-100 rounded p-1 border text-xs flex items-center">
-					{String(ethers.utils.formatEther((feed[1] as any)._hex))}
+					{feed[1] ? String(ethers.utils.formatEther((feed[1] as any)._hex)) : '-'}
 					<img
 						src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@bea1a9722a8c63169dcc06e86182bf2c55a76bbc/svg/color/matic.svg"
 						alt=""
@@ -52,8 +52,6 @@ const Feed = ({ ownerAddress }) => {
 		functionName: 'getTipsHistory',
 		args: [ownerAddress],
 	});
-
-	console.log(data);
 
 	return (
 		<div className="space-y-1">

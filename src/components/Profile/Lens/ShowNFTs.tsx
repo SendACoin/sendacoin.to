@@ -10,7 +10,7 @@ dayjs.extend(relativeTime);
 
 const ShowNFTs = ({ ownerAddress }) => {
 	const [nfts, setNFT] = useState([]);
-	const [result, reexecuteQuery] = useQuery({
+	const [result] = useQuery({
 		query: GetNfts,
 		variables: {
 			address: ownerAddress,
@@ -30,7 +30,7 @@ const ShowNFTs = ({ ownerAddress }) => {
 			) : null}
 			<div className="grid grid-cols-2 gap-2">
 				{nfts.map((nft) => (
-					<article key={nft.contractAddress + nft.name} className="bg-white rounded-lg p-2 mb-1 border">
+					<article key={nft.originalContent.uri} className="bg-white rounded-lg p-2 mb-1 border">
 						{nft.originalContent.uri ? (
 							<img
 								className="rounded-lg mb-2 bg-gray-100"

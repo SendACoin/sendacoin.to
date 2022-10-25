@@ -22,8 +22,6 @@ const Profile = () => {
 		return <ENSProfile ens={router.query.profile} />;
 	}
 
-	if (!String(router.query.profile).endsWith('.lens')) return 'Invalid lens handle';
-
 	return <LensProfile profileId={router.query.profile} />;
 };
 

@@ -30,7 +30,7 @@
     "ipfs-http-client": "^58.0.1",
     "lens-protocol": "^0.1.5",
     "moralis-v1": "^1.11.0",
-    "next": "12.3.1",
+    "next": "^13.0.0",
     "react": "18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "18.2.0",

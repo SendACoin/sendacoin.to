@@ -31,7 +31,7 @@ const EthProfile = ({ profileAddress }) => {
 	const { address } = useAccount();
 	const [lensHandle, setLendsHandle] = useState(null);
 
-	const [result, reexecuteQuery] = useQuery({
+	const [result] = useQuery({
 		query: UserProfile,
 		variables: {
 			request: {
@@ -70,7 +70,6 @@ const EthProfile = ({ profileAddress }) => {
 
 					<div className="text-center mt-14 mb-5">
 						<b className="text-xl">{shortenAddress(profileAddress)}</b>
-						{/* <p className="text-gray-500 text-sm mt-2 p-1">{profile.bio}</p> */}
 						<p className="text-gray-500 space-x-5 text-sm mt-2">
 							{address ? <ProfileTipsStats ownerAddress={profileAddress} /> : null}
 						</p>

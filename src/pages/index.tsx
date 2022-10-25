@@ -44,7 +44,7 @@ const Home = () => {
 			<section className="w-full bg-gradient-to-b min-h-screen">
 				<PageTitle title="Sendacoin - Share Profile ! Collect Tips!" />
 
-				<div className="grid md:grid-cols-2 gap-7 items-center place-items-center">
+				<div className="grid px-2 md:px-0 md:grid-cols-2 gap-7 items-center place-items-center">
 					<section>
 						<div className="mb-10">
 							<h1 className="mt-20 text-4xl md:text-6xl font-extrabold tracking-tight md:leading-tight">
@@ -62,13 +62,11 @@ const Home = () => {
 						<div className="flex -space-x-2 justify-center">
 							{Profiles.map((profile) => (
 								<Link key={profile.handle} href={`/${profile.handle}`} passHref>
-									<a>
-										<img
-											className="inline-block h-14 md:h-20 md:w-20 rounded-full ring-2 ring-white hover:ring-gray-400"
-											src={profile.picture}
-											alt=""
-										/>
-									</a>
+									<img
+										className="inline-block h-14 md:h-20 md:w-20 rounded-full ring-2 ring-white hover:ring-gray-400"
+										src={profile.picture}
+										alt=""
+									/>
 								</Link>
 							))}
 						</div>

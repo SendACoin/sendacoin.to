@@ -25,18 +25,27 @@ const ProfileTipsStats = ({ ownerAddress }) => {
 		args: [ownerAddress],
 	});
 
+	if (isLoading || isReceivedLoading) return null;
+	if (isError || isReceivedError) return null;
+
 	return (
 		<>
 			<span>
 				<span className="text-gray-900 mr-1">
-					{!isLoading && !isError ? String(formatNumber(ethers.utils.formatEther((data as any)._hex))) : '-'}
+					{!isLoading && !isError
+						? (data as any)._hex
+							? String(formatNumber(ethers.utils.formatEther((data as any)._hex)))
+							: '-'
+						: '-'}
 				</span>
 				Donated
 			</span>
 			<span>
 				<span className="text-gray-900 mr-1">
 					{!isReceivedLoading && !isReceivedError
-						? String(formatNumber(ethers.utils.formatEther((received as any)._hex)))
+						? (received as any)._hex
+							? String(formatNumber(ethers.utils.formatEther((received as any)._hex)))
+							: '-'
 						: '-'}{' '}
 				</span>
 				Received

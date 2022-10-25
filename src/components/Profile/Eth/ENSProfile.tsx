@@ -9,8 +9,6 @@ const ENSProfile = ({ ens }) => {
 		cacheTime: 2_000,
 	});
 
-	console.log(data, isError, isLoading);
-
 	return <Spinner loading={isLoading}>{data ? <Profile profileAddress={data} /> : null}</Spinner>;
 };
 

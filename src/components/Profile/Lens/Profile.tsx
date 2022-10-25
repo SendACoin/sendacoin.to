@@ -30,7 +30,7 @@ const LensProfile = ({ profileId }) => {
 	const [profile, setProfile] = useState(null);
 	const router = useRouter();
 
-	const [result, reexecuteQuery] = useQuery({
+	const [result] = useQuery({
 		query: GetProfilesQuery,
 		variables: {
 			request: {
