@@ -32,7 +32,11 @@ const ShowNFTs = ({ ownerAddress }) => {
 				{nfts.map((nft) => (
 					<article key={nft.contractAddress + nft.name} className="bg-white rounded-lg p-2 mb-1 border">
 						{nft.originalContent.uri ? (
-							<img className="rounded-lg mb-2" src={formatImageUrl(nft.originalContent.uri)} alt="" />
+							<img
+								className="rounded-lg mb-2 bg-gray-100"
+								src={formatImageUrl(nft.originalContent.uri)}
+								alt=""
+							/>
 						) : null}
 						<p className="text-xs">{nft.name}</p>
 					</article>

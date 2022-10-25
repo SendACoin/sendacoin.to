@@ -13,6 +13,7 @@ const Post = ({ postId }) => {
 
 	useEffect(() => {
 		if (postId) {
+			console.log(`https://arweave.net/${postId}`);
 			fetch(`https://arweave.net/${postId}`)
 				.then((res) => res.json())
 				.then((res) => setPost(res));
@@ -22,10 +23,12 @@ const Post = ({ postId }) => {
 	if (post === null) return null;
 
 	return (
-		<div className="border bg-white rounded-lg p-2">
-			<p className="text-gray-900 mb-2">{post.content.title}</p>
-			<p className="text-sm text-gray-500">{post.content.body}</p>
-		</div>
+		<a href={`/user_blog/${postId}`} target="_BLANK" rel="noreferrer noopener">
+			<div className="border bg-white rounded-lg p-2">
+				<p className="text-gray-900 mb-2">{post.content.title}</p>
+				<p className="text-sm text-gray-500 line-clamp-3">{post.content.body}</p>
+			</div>
+		</a>
 	);
 };
 

@@ -40,7 +40,7 @@ const Layout = ({ children }) => {
 										<a>
 											<img
 												src="https://sendacoin.to/assets/images/logo.svg"
-												className="md:w-32 md:h-32"
+												className="w-32 pl-2 md:pl-0  md:w-32 md:h-32"
 												alt=""
 											/>
 										</a>
@@ -82,7 +82,7 @@ const Layout = ({ children }) => {
 					{HeaderVisibleRoutes.includes(router.asPath) ? (
 						<>
 							<footer className="mt-10 py-4 pb-14 text-sm border-t border-gray-100 text-center text-gray-500">
-								<div className="md:space-x-5">
+								<div className="md:space-x-5 flex items-center justify-center">
 									<Link href="/feedback" passHref>
 										<a className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer">
 											Feedback
@@ -103,6 +103,14 @@ const Layout = ({ children }) => {
 										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
 									>
 										Donate
+									</a>
+									<a
+										href="https://github.com/SendACoin/"
+										target="_BLANK"
+										rel="noreferrer"
+										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
+									>
+										Github
 									</a>
 									<Link href="/thanks" passHref>
 										<a className="hidden md:block px-2 text-gray-500 hover:text-gray-900 cursor-pointer">

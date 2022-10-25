@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useQuery } from 'urql';
-import { GetProfilesQuery } from 'graphql/queries';
+import { GetProfilesQuery, UserProfile } from 'graphql/queries';
 import React, { useEffect, useState } from 'react';
 import { Tabs } from '@mantine/core';
 import dayjs from 'dayjs';
@@ -23,16 +23,33 @@ import ProfileFooter from '../ProfileFooter';
 import { useAccount } from 'wagmi';
 import ProfileTipsStats from '../ProfileTipsStats';
 import BlogPost from '../BlogPost';
+import LensProfile from '../Lens/Profile';
 
 dayjs.extend(relativeTime);
 
 const EthProfile = ({ profileAddress }) => {
 	const { address } = useAccount();
+	const [lensHandle, setLendsHandle] = useState(null);
 
-	useEffect(() => {}, []);
+	const [result, reexecuteQuery] = useQuery({
+		query: UserProfile,
+		variables: {
+			request: {
+				ownedBy: profileAddress,
+			},
+		},
+	});
+
+	useEffect(() => {
+		if (result && result?.data?.profiles) {
+			if (result?.data.profiles.items[0]) setLendsHandle(result?.data.profiles.items[0].handle);
+		}
+	}, [result]);
+
+	if (lensHandle) return <LensProfile profileId={lensHandle} />;
 
 	return (
-		<Spinner loading={false}>
+		<Spinner loading={result.fetching ? true : false}>
 			<div className="pt-3 md:pt-8 pb-10">
 				<PageTitle title={shortenAddress(profileAddress)} />
 

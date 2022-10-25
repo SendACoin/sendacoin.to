@@ -6,8 +6,10 @@ const Feedback = () => {
 		<section className="w-full bg-gradient-to-b ">
 			<PageTitle title={'Feedback'} />
 
-			<Card title="Feedback">
-				<p>Coming Soon</p>
+			<Card title="Love to hear your feedback!">
+				<a href="https://twitter.com/pjijin_" target="_BLANK" rel="noreferrer noopener">
+					DM your suggestion / feedback on twitter.
+				</a>
 			</Card>
 		</section>
 	);

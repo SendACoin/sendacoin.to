@@ -100,7 +100,7 @@ const LensProfile = ({ profileId }) => {
 									</span>
 									{address ? <ProfileTipsStats ownerAddress={profile.ownedBy} /> : null}
 								</p>
-								<ShowSocialAccounts attributes={profile.attributes} />
+								<ShowSocialAccounts profileId={profileId} attributes={profile.attributes} />
 							</div>
 
 							<div className="gap-5 mb-8 px-2 md:px-5">
@@ -112,7 +112,7 @@ const LensProfile = ({ profileId }) => {
 											</Tabs.Tab>
 											{address ? <Tabs.Tab value="feed">Feed</Tabs.Tab> : null}
 											<Tabs.Tab value="posts">Posts</Tabs.Tab>
-											{/* <Tabs.Tab value="blog">Blog</Tabs.Tab> */}
+											<Tabs.Tab value="blog">Blog</Tabs.Tab>
 											<Tabs.Tab value="nfts">NFTs</Tabs.Tab>
 										</Tabs.List>
 									</div>
@@ -137,11 +137,11 @@ const LensProfile = ({ profileId }) => {
 											<ShowPost id={profile.id} />
 										</ProfileCard>
 									</Tabs.Panel>
-									{/* <Tabs.Panel value="blog" pt="xs">
+									<Tabs.Panel value="blog" pt="xs">
 										<ProfileCard>
 											<BlogPost address={profile.ownedBy} />
 										</ProfileCard>
-									</Tabs.Panel> */}
+									</Tabs.Panel>
 									<Tabs.Panel value="nfts" pt="xs">
 										<ProfileCard>
 											<ShowNFTs ownerAddress={profile.ownedBy} />

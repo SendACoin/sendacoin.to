@@ -22,6 +22,7 @@
     "@mantine/nprogress": "^5.5.5",
     "@radix-ui/react-icons": "^1.1.1",
     "@rainbow-me/rainbowkit": "^0.7.2",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@vercel/og": "^0.0.19",
     "boring-avatars": "^1.7.0",
     "dayjs": "^1.11.5",
@@ -34,6 +35,7 @@
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
+    "react-markdown": "^8.0.3",
     "react-moralis": "^1.4.2",
     "urql": "^3.0.3",
     "wagmi": "^0.7.5"

@@ -1,5 +1,6 @@
 import { EyeOpenIcon, Share1Icon } from '@radix-ui/react-icons';
 import RecommendedProfiles from 'components/Home/RecommendedProfiles';
+import ShowUrlBar from 'components/Home/ShowUrlBar';
 import PageTitle from 'components/Layout/PageTitle';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -38,9 +39,6 @@ const Profiles = [
 ];
 
 const Home = () => {
-	const [handle, setHandle] = useState('');
-	const router = useRouter();
-
 	return (
 		<>
 			<section className="w-full bg-gradient-to-b min-h-screen">
@@ -53,10 +51,11 @@ const Home = () => {
 								Share you lens profile. <br />
 								Collect payments!
 							</h1>
-							<div className="space-x-5 flex items-center uppercase mt-2">
+							<div className="space-x-5 flex items-center uppercase mt-2 mb-5">
 								<p className="text-gray-500 text-xs pl-2">0% commission!</p>
 								<p className="text-gray-500 text-xs pl-2">Instant Transfer</p>
 							</div>
+							<ShowUrlBar />
 						</div>
 					</section>
 					<div className="mt-20 grid">
