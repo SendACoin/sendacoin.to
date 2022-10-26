@@ -37,6 +37,7 @@
     "react-hot-toast": "^2.4.0",
     "react-markdown": "^8.0.3",
     "react-moralis": "^1.4.2",
+    "react-tippy": "^1.4.0",
     "urql": "^3.0.3",
     "wagmi": "^0.7.5"
   },

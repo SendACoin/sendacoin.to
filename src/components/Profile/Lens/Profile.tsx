@@ -22,6 +22,7 @@ import ProfileFooter from '../ProfileFooter';
 import { useAccount } from 'wagmi';
 import ProfileTipsStats from '../ProfileTipsStats';
 import BlogPost from '../BlogPost';
+import ProfileRevenue from './ProfileRevenue';
 
 dayjs.extend(relativeTime);
 
@@ -99,6 +100,8 @@ const LensProfile = ({ profileId }) => {
 										Following
 									</span>
 									{address ? <ProfileTipsStats ownerAddress={profile.ownedBy} /> : null}
+
+									<ProfileRevenue profileId={profile.id} />
 								</p>
 								<ShowSocialAccounts
 									profileId={profileId}

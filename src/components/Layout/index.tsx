@@ -162,7 +162,7 @@ const Layout = ({ children }) => {
 const MobileNav = ({ children, link, className = '', active = false }) => {
 	return (
 		<Link
-			as={link}
+			passHref
 			href={link}
 			className={`p-3 ${
 				active ? 'text-gray-900 ' : 'text-gray-400 '

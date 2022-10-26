@@ -7,6 +7,8 @@ import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { chains, wagmiClient } from 'libs/connectors';
 import { WagmiConfig } from 'wagmi';
 
+import 'react-tippy/dist/tippy.css';
+
 import '@rainbow-me/rainbowkit/styles.css';
 import '../styles/globals.css';
 import 'tailwindcss/tailwind.css';
@@ -29,6 +31,8 @@ function MyApp({ Component, pageProps }) {
 					colorScheme: 'light',
 				}}
 			>
+				<Toaster containerClassName="text-sm" />
+
 				<RouterTransition />
 				<WagmiConfig client={wagmiClient}>
 					<RainbowKitProvider chains={chains} modalSize="compact" appInfo={{ appName: 'Sendacoin.to' }}>
@@ -37,7 +41,6 @@ function MyApp({ Component, pageProps }) {
 						</Layout>
 					</RainbowKitProvider>
 				</WagmiConfig>
-				<Toaster />
 			</MantineProvider>
 		</Provider>
 	);

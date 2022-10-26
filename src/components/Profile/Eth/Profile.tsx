@@ -1,20 +1,15 @@
-import { useRouter } from 'next/router';
 import { useQuery } from 'urql';
-import { GetProfilesQuery, UserProfile } from 'graphql/queries';
+import { UserProfile } from 'graphql/queries';
 import React, { useEffect, useState } from 'react';
 import { Tabs } from '@mantine/core';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
-import { formatImageUrl, shortenAddress } from 'libs/helpers';
+import { shortenAddress } from 'libs/helpers';
 import Avatar from 'boring-avatars';
 
-import Settings from '../../../config';
-import Image from 'next/image';
-import toast from 'react-hot-toast';
 import PageTitle from 'components/Layout/PageTitle';
 import Spinner from 'components/Spinner';
 import ShowSocialAccounts from 'components/Profile/Lens/ShowSocialAccounts';
-import ShowPost from 'components/Profile/Lens/ShowPost';
 import ShowNFTs from 'components/Profile/Lens/ShowNFTs';
 import ProfileCard from '../ProfileCard';
 import Tip from '../Tip';
