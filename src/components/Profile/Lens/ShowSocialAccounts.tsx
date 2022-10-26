@@ -1,8 +1,8 @@
-import { GlobeIcon, TwitterLogoIcon } from '@radix-ui/react-icons';
+import { GlobeIcon, Link1Icon, Link2Icon, TwitterLogoIcon } from '@radix-ui/react-icons';
 import { formatUrl } from 'libs/helpers';
 import React from 'react';
 
-const ShowSocialAccounts = ({ attributes = [] }) => {
+const ShowSocialAccounts = ({ attributes = [], profileId }) => {
 	return (
 		<div className="flex items-center justify-center space-x-5 mt-2">
 			{attributes.map((attribute) => {
@@ -17,7 +17,7 @@ const ShowSocialAccounts = ({ attributes = [] }) => {
 										rel="noopener noreferrer"
 										href={`https://twitter.com/${attribute.value}`}
 									>
-										<TwitterLogoIcon />
+										<img src="/assets/images/twitter.svg" className="w-4 h-4" alt="" />
 									</a>
 								),
 								website: (
@@ -27,7 +27,7 @@ const ShowSocialAccounts = ({ attributes = [] }) => {
 										rel="noopener noreferrer"
 										href={`${formatUrl(attribute.value)}`}
 									>
-										<GlobeIcon />
+										<Link2Icon />
 									</a>
 								),
 								app: (
@@ -35,7 +35,7 @@ const ShowSocialAccounts = ({ attributes = [] }) => {
 										className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 px-2 py-2 rounded-lg"
 										target="_BLANK"
 										rel="noopener noreferrer"
-										href={`https://lenster.xyz/u/${attribute.value}`}
+										href={`https://lenster.xyz/u/${profileId}`}
 									>
 										<img src="/assets/images/lenster.svg" className="w-4 h-4" alt="" />
 									</a>
@@ -45,12 +45,11 @@ const ShowSocialAccounts = ({ attributes = [] }) => {
 					</React.Fragment>
 				);
 			})}
-
 			<a
 				className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 px-2 py-2 rounded-lg"
 				target="_BLANK"
 				rel="noopener noreferrer"
-				href={`https://lenstube.xyz/USER`}
+				href={`https://lenstube.xyz/${profileId}`}
 			>
 				<img src="/assets/images/lenstube.svg" className="w-4 h-4" alt="" />
 			</a>

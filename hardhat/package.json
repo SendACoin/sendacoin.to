@@ -38,5 +38,8 @@
   },
   "mocha": {
     "timeout": 10000000
+  },
+  "dependencies": {
+    "@chainlink/contracts": "^0.5.1"
   }
 }

@@ -48,3 +48,19 @@ a {
     border-radius: 100%;
     border: 4px solid #fff !important;
 }
+
+.blog_post p {
+  font-family: Inter, sans-serif;
+  margin: 24px auto 0;
+  color: #66758f;
+  font-size: 20px;
+  line-height: 140%;
+  font-weight: 400;
+}
+.blog_post h2 {
+    margin: 80px auto 0;
+      font-size: 48px;
+      line-height: 125%;
+      -o-object-fit: fill;
+      object-fit: fill;
+}

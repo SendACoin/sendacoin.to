@@ -5,9 +5,17 @@
 /hardhat/artifacts
 /hardhat/cache
 /hardhat/gas-report.txt
+/hardhat/deployments
 /node_modules
 /.pnp
 .pnp.js
+
+# sitemaps
+
+/public/sitemaps/*
+/public/sitemap.xml
+/public/sitemap_pages.xml
+
 
 # testing
 /coverage

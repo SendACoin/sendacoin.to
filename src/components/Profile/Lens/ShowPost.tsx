@@ -22,7 +22,9 @@ const ShowPost = ({ id }) => {
 
 	return (
 		<>
-			{isEmpty(posts) ? <p className="text-gray-500 text-sm">user doesn{"'"}t have a post yet!</p> : null}
+			{isEmpty(posts) ? (
+				<p className="text-gray-500 text-center text-sm">user doesn{"'"}t have a post yet!</p>
+			) : null}
 
 			{posts.map((post) => (
 				<Post

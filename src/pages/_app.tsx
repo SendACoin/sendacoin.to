@@ -1,6 +1,6 @@
 import { createClient, Provider } from 'urql';
 import Layout from 'components/Layout';
-import { MantineProvider } from '@mantine/core';
+import { createEmotionCache, MantineProvider } from '@mantine/core';
 import { RouterTransition } from '../components/Layout/RouterTransition';
 import { Toaster } from 'react-hot-toast';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
@@ -15,10 +15,13 @@ const client = createClient({
 	url: 'https://api.lens.dev',
 });
 
+const myCache = createEmotionCache({ key: 'sac' });
+
 function MyApp({ Component, pageProps }) {
 	return (
 		<Provider value={client}>
 			<MantineProvider
+				emotionCache={myCache}
 				withGlobalStyles
 				withNormalizeCSS
 				theme={{
@@ -28,7 +31,7 @@ function MyApp({ Component, pageProps }) {
 			>
 				<RouterTransition />
 				<WagmiConfig client={wagmiClient}>
-					<RainbowKitProvider chains={chains} modalSize="compact">
+					<RainbowKitProvider chains={chains} modalSize="compact" appInfo={{ appName: 'Sendacoin.to' }}>
 						<Layout>
 							<Component {...pageProps} />
 						</Layout>

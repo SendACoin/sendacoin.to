@@ -1,6 +1,6 @@
 const { run } = require("hardhat")
 
-const verify = async (contractAddress, args) => {
+const verify = async (contractAddress: string, args: any[]) => {
 
     try {
         await run("verify:verify", {

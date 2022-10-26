@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useQuery } from 'urql';
 import { GetProfilesQuery } from 'graphql/queries';
 import React, { useEffect, useState } from 'react';
-import { Button, NumberInput, Select, Tabs, Textarea } from '@mantine/core';
+import { Tabs } from '@mantine/core';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { formatImageUrl } from 'libs/helpers';
@@ -16,14 +16,21 @@ import ShowSocialAccounts from 'components/Profile/Lens/ShowSocialAccounts';
 import ShowPost from 'components/Profile/Lens/ShowPost';
 import ShowNFTs from 'components/Profile/Lens/ShowNFTs';
 import ProfileCard from '../ProfileCard';
+import Tip from '../Tip';
+import Feed from '../Feed';
+import ProfileFooter from '../ProfileFooter';
+import { useAccount } from 'wagmi';
+import ProfileTipsStats from '../ProfileTipsStats';
+import BlogPost from '../BlogPost';
 
 dayjs.extend(relativeTime);
 
 const LensProfile = ({ profileId }) => {
+	const { address } = useAccount();
 	const [profile, setProfile] = useState(null);
 	const router = useRouter();
 
-	const [result, reexecuteQuery] = useQuery({
+	const [result] = useQuery({
 		query: GetProfilesQuery,
 		variables: {
 			request: {
@@ -49,12 +56,12 @@ const LensProfile = ({ profileId }) => {
 		<Spinner loading={profile ? false : true}>
 			{profile ? (
 				<>
-					<div className="pt-8 pb-10">
+					<div className="pt-3 md:pt-8 pb-10">
 						<PageTitle title={router.query.profile} />
 
 						<div
 							className="mx-auto max-w-screen-xl  relative bg-white border rounded-lg"
-							style={{ width: '500px' }}
+							style={{ maxWidth: '500px' }}
 						>
 							<div
 								className="bg-gray-100 rounded-t-lg relative w-full h-32 "
@@ -74,55 +81,65 @@ const LensProfile = ({ profileId }) => {
 										alt=""
 										width={125}
 										height={125}
-										className="rounded-full w-32 h-32 border-3"
+										className="rounded-full w-32 h-32 border-3 object-cover	bg-gray-50"
 									/>
 								</div>
 							</div>
 
 							<div className="text-center mt-14 mb-5">
-								<b className="text-xl">{profile.name}</b>
-								<p className="text-gray-500 text-sm">{profile.bio}</p>
+								<b className="text-xl">{profile.name ?? profile.handle}</b>
+								<p className="text-gray-500 text-sm mt-2 p-1">{profile.bio}</p>
 								<p className="text-gray-500 space-x-5 text-sm mt-2">
-									<span>{profile.stats.totalFollowers} Followers</span>
-									<span>{profile.stats.totalFollowing} Following</span>
+									<span>
+										<span className="text-gray-900 mr-1">{profile.stats.totalFollowers}</span>{' '}
+										Followers
+									</span>
+									<span>
+										<span className="text-gray-900 mr-1">{profile.stats.totalFollowing}</span>{' '}
+										Following
+									</span>
+									{address ? <ProfileTipsStats ownerAddress={profile.ownedBy} /> : null}
 								</p>
-
-								<ShowSocialAccounts attributes={profile.attributes} />
+								<ShowSocialAccounts profileId={profileId} attributes={profile.attributes} />
 							</div>
 
-							<div className="gap-5 mb-8 px-5">
+							<div className="gap-5 mb-8 px-2 md:px-5">
 								<Tabs color="dark" variant="pills" defaultValue="tip">
 									<div className="grid place-items-center">
 										<Tabs.List>
-											<Tabs.Tab value="tip">Tip</Tabs.Tab>
+											<Tabs.Tab value="tip">
+												{address == profile.ownedBy ? 'About' : 'Tip'}
+											</Tabs.Tab>
+											{address ? <Tabs.Tab value="feed">Feed</Tabs.Tab> : null}
 											<Tabs.Tab value="posts">Posts</Tabs.Tab>
+											<Tabs.Tab value="blog">Blog</Tabs.Tab>
 											<Tabs.Tab value="nfts">NFTs</Tabs.Tab>
 										</Tabs.List>
 									</div>
 
 									<Tabs.Panel value="tip" pt="xs">
 										<ProfileCard>
-											<h4 className="font-bold">Buy a Coffee for {profile.name}</h4>
-
-											<form className="space-y-3 mt-5">
-												<div className="grid grid-cols-12 gap-5">
-													<Select className="col-span-4" label="Coin" data={[]} />
-
-													<NumberInput label="Amount" value={0.1} className="col-span-8" />
-												</div>
-
-												<Textarea placeholder="Your Message" />
-
-												<Button color="dark" variant="outline" fullWidth>
-													Tip
-												</Button>
-											</form>
+											{profile.ownedBy ? (
+												<Tip name={profile.name} ownerAddress={profile.ownedBy} />
+											) : null}
 										</ProfileCard>
 									</Tabs.Panel>
 
+									<Tabs.Panel value="feed" pt="xs">
+										{address ? (
+											<ProfileCard>
+												{profile.ownedBy ? <Feed ownerAddress={profile.ownedBy} /> : null}
+											</ProfileCard>
+										) : null}
+									</Tabs.Panel>
 									<Tabs.Panel value="posts" pt="xs">
 										<ProfileCard>
 											<ShowPost id={profile.id} />
+										</ProfileCard>
+									</Tabs.Panel>
+									<Tabs.Panel value="blog" pt="xs">
+										<ProfileCard>
+											<BlogPost address={profile.ownedBy} />
 										</ProfileCard>
 									</Tabs.Panel>
 									<Tabs.Panel value="nfts" pt="xs">
@@ -133,6 +150,7 @@ const LensProfile = ({ profileId }) => {
 								</Tabs>
 							</div>
 						</div>
+						<ProfileFooter address={profile.ownedBy} />
 					</div>
 				</>
 			) : null}
