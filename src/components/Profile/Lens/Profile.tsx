@@ -87,7 +87,7 @@ const LensProfile = ({ profileId }) => {
 							</div>
 
 							<div className="text-center mt-14 mb-5">
-								<b className="text-xl">{profile.name}</b>
+								<b className="text-xl">{profile.name ?? profile.handle}</b>
 								<p className="text-gray-500 text-sm mt-2 p-1">{profile.bio}</p>
 								<p className="text-gray-500 space-x-5 text-sm mt-2">
 									<span>
