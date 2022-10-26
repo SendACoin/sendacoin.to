@@ -12,6 +12,7 @@ import 'react-tippy/dist/tippy.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import '../styles/globals.css';
 import 'tailwindcss/tailwind.css';
+import Script from 'next/script';
 
 const client = createClient({
 	url: 'https://api.lens.dev',
@@ -31,6 +32,8 @@ function MyApp({ Component, pageProps }) {
 					colorScheme: 'light',
 				}}
 			>
+				<Script async src="https://cdn.splitbee.io/sb.js" />
+
 				<Toaster containerClassName="text-sm" />
 
 				<RouterTransition />

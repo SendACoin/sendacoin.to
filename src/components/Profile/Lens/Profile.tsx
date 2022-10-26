@@ -6,6 +6,7 @@ import { Tabs } from '@mantine/core';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { formatImageUrl } from 'libs/helpers';
+import Linkify from 'react-linkify';
 
 import Settings from '../../../config';
 import Image from 'next/image';
@@ -89,7 +90,23 @@ const LensProfile = ({ profileId }) => {
 
 							<div className="text-center mt-14 mb-5">
 								<b className="text-xl">{profile.name ?? profile.handle}</b>
-								<p className="text-gray-500 text-sm mt-2 p-1">{profile.bio}</p>
+								<p className="text-gray-500 text-sm mt-2 p-1">
+									<Linkify
+										componentDecorator={(decoratedHref, decoratedText, key) => (
+											<a
+												target="_blank"
+												rel="noreferrer noopener"
+												className="hover:text-gray-900"
+												href={decoratedHref}
+												key={key}
+											>
+												{decoratedText}
+											</a>
+										)}
+									>
+										{profile.bio}
+									</Linkify>
+								</p>
 								<p className="text-gray-500 space-x-5 text-sm mt-2">
 									<span>
 										<span className="text-gray-900 mr-1">{profile.stats.totalFollowers}</span>{' '}

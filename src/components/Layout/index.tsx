@@ -85,8 +85,8 @@ const Layout = ({ children }) => {
 					{children}
 					{HeaderVisibleRoutes.includes(router.asPath) ? (
 						<>
-							<footer className="mt-10 py-4 pb-14 text-sm border-t border-gray-100 text-center text-gray-500">
-								<div className="md:space-x-5 flex items-center justify-center">
+							<footer className="mt-8 py-4 pb-5 text-sm border-t border-gray-100 text-center text-gray-500 flex justify-between items-center">
+								<div className="md:space-x-5 space-y-2 md:space-y-0 grid grid-cols-2 md:flex items-center justify-center">
 									<Link
 										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
 										href="/feedback"
@@ -118,10 +118,18 @@ const Layout = ({ children }) => {
 									>
 										Github
 									</a>
+									<a
+										href="https://app.splitbee.io/public/sendacoin.to"
+										target="_BLANK"
+										rel="noreferrer"
+										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
+									>
+										Analytics
+									</a>
 									<Link
 										href="/thanks"
 										passHref
-										className="hidden md:block px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
+										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
 									>
 										Thanks
 									</Link>
@@ -133,7 +141,7 @@ const Layout = ({ children }) => {
 										Contact
 									</Link>
 								</div>
-								<p className="py-4 text-xs text-center text-gray-500 flex items-center justify-center">
+								<p className="text-xs text-center text-gray-500 flex items-center justify-center">
 									Made with
 									<img
 										src="https://twemoji.maxcdn.com/svg/1f33f.svg"
