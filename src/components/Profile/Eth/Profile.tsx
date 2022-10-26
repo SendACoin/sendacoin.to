@@ -63,7 +63,7 @@ const EthProfile = ({ profileAddress }) => {
 								size={125}
 								name={profileAddress}
 								variant="beam"
-								colors={['#92A1C6', '#146A7C', '#F0AB3D', '#C271B4', '#C20D90']}
+								colors={['#FD5D5D', '#FF8080', '#FFF7BC', '#C0EDA6', '#FF7D7D']}
 							/>
 						</div>
 					</div>
@@ -73,6 +73,8 @@ const EthProfile = ({ profileAddress }) => {
 						<p className="text-gray-500 space-x-5 text-sm mt-2">
 							{address ? <ProfileTipsStats ownerAddress={profileAddress} /> : null}
 						</p>
+
+						<ShowSocialAccounts profileId={null} attributes={[]} profileAddress={profileAddress} />
 					</div>
 
 					<div className="gap-5 mb-8 px-2 md:px-5">

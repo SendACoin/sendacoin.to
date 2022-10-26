@@ -100,7 +100,11 @@ const LensProfile = ({ profileId }) => {
 									</span>
 									{address ? <ProfileTipsStats ownerAddress={profile.ownedBy} /> : null}
 								</p>
-								<ShowSocialAccounts profileId={profileId} attributes={profile.attributes} />
+								<ShowSocialAccounts
+									profileId={profileId}
+									attributes={profile.attributes}
+									profileAddress={profile.ownedBy}
+								/>
 							</div>
 
 							<div className="gap-5 mb-8 px-2 md:px-5">

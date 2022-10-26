@@ -33,6 +33,7 @@ const ShowNFTs = ({ ownerAddress }) => {
 					<article key={nft.originalContent.uri} className="bg-white rounded-lg p-2 mb-1 border">
 						{nft.originalContent.uri ? (
 							<img
+								height={125}
 								className="rounded-lg mb-2 bg-gray-100"
 								src={formatImageUrl(nft.originalContent.uri)}
 								alt=""
