@@ -84,17 +84,19 @@ export default async function handler(req: NextRequest) {
 					style={{
 						display: 'flex',
 						margin: '10px',
+						marginTop: '20px',
+						marginLeft: '20px',
 						fontSize: 60,
 						color: 'black',
-						height: '605px',
-						width: '1180px',
+						height: '580px',
+						width: '1170px',
 						flexDirection: 'row',
 						justifyContent: 'center',
 						alignItems: 'center',
 					}}
 				>
 					<div
-						tw={`bg-gray-200 h-full flex-2 justify-center items-center rounded-lg`}
+						tw={`bg-gray-200 h-full ml-10 flex-2 justify-center items-center rounded-lg`}
 						style={{ display: 'flex', flexDirection: 'column', background: '#fbf1dc' }}
 					>
 						<p
@@ -125,7 +127,7 @@ export default async function handler(req: NextRequest) {
 							{bio}
 						</p>
 						<p
-							tw={`text-gray-900 text-4xl rounded-lg px-4 py-2 flex items-center gap-5`}
+							tw={`text-gray-900 text-4xl rounded-lg px-10 py-5 flex items-center`}
 							style={{ marginTop: '-40px', background: '#fbf1dc' }}
 						>
 							<img
