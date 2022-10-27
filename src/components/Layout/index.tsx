@@ -4,7 +4,47 @@ import { useRouter } from 'next/router';
 import { useAccount } from 'wagmi';
 import ConnectButtonLink from './ConnectButton';
 
-export const HeaderVisibleRoutes = ['/', '/dashboard', '/explore', '/thanks', '/feedback', '/privacy', '/contact'];
+export const HeaderVisibleRoutes = [
+	'/',
+	'/dashboard',
+	'/explore',
+	'/thanks',
+	'/feedback',
+	'/privacy',
+	'/contact',
+	'/embed',
+];
+
+const HeaderNavigation = [
+	{
+		link: '/',
+		label: 'Home',
+	},
+	{
+		link: '/explore',
+		label: 'Explore',
+	},
+	{
+		link: '/dashboard',
+		label: 'Dashboard',
+		authenticated: true,
+	},
+];
+
+const HeaderLink = ({ nav, active }) => {
+	return (
+		<Link
+			key={nav.link}
+			href={nav.link}
+			passHref
+			className={`hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer  ${
+				active ? 'bg-gray-100' : ''
+			}`}
+		>
+			{nav.label}
+		</Link>
+	);
+};
 
 const Layout = ({ children }) => {
 	const { address, isConnecting, isDisconnected } = useAccount();
@@ -36,41 +76,43 @@ const Layout = ({ children }) => {
 						<>
 							<header className="grid grid-cols-2 md:grid-cols-3 gap-5">
 								<div className="py-5 md:py-0">
-									<Link href="/" passHref>
+									<Link href="/" passHref className="flex items-center">
 										<img
 											src="https://sendacoin.to/assets/images/logo.svg"
 											className="w-32 pl-2 md:pl-0  md:w-32 md:h-32"
 											alt=""
 										/>
+										{process.env.NEXT_PUBLIC_TESTNET ? (
+											<span className="text-xs ml-1 border border-gray-300 text-gray-600 rounded-lg px-1.5">
+												Testnet
+											</span>
+										) : null}
 									</Link>
 								</div>
 
 								<div className="flex justify-end md:justify-start items-center md:col-span-2">
 									<nav className="hidden md:flex items-center bg-white border rounded-full px-2 py-2 space-x-2 shadow-sm ml-0 mr-0">
-										<Link
-											href="/"
-											passHref
-											className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer"
-										>
-											Home
-										</Link>
-										<Link
-											href="/explore"
-											passHref
-											className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer"
-										>
-											Explore
-										</Link>
-
-										{address ? (
-											<Link
-												href="/dashboard"
-												passHref
-												className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer"
-											>
-												Dashboard
-											</Link>
-										) : null}
+										{HeaderNavigation.map((nav) => {
+											if (nav.authenticated) {
+												if (address) {
+													return (
+														<HeaderLink
+															key={nav.link}
+															nav={nav}
+															active={router.asPath === nav.link}
+														/>
+													);
+												}
+											} else {
+												return (
+													<HeaderLink
+														key={nav.link}
+														nav={nav}
+														active={router.asPath === nav.link}
+													/>
+												);
+											}
+										})}
 
 										<ConnectButtonLink />
 									</nav>
@@ -85,8 +127,8 @@ const Layout = ({ children }) => {
 					{children}
 					{HeaderVisibleRoutes.includes(router.asPath) ? (
 						<>
-							<footer className="mt-10 py-4 pb-14 text-sm border-t border-gray-100 text-center text-gray-500">
-								<div className="md:space-x-5 flex items-center justify-center">
+							<footer className="mt-8 py-4 pb-8 text-sm border-t border-gray-100 text-center text-gray-500 flex justify-between items-center">
+								<div className="md:space-x-5 space-y-2 md:space-y-0 grid grid-cols-2 md:flex items-center justify-center">
 									<Link
 										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
 										href="/feedback"
@@ -118,10 +160,25 @@ const Layout = ({ children }) => {
 									>
 										Github
 									</a>
+									<a
+										href="https://app.splitbee.io/public/sendacoin.to"
+										target="_BLANK"
+										rel="noreferrer"
+										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
+									>
+										Analytics
+									</a>
+									<Link
+										href="/embed"
+										passHref
+										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
+									>
+										Embed
+									</Link>
 									<Link
 										href="/thanks"
 										passHref
-										className="hidden md:block px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
+										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
 									>
 										Thanks
 									</Link>
@@ -133,7 +190,7 @@ const Layout = ({ children }) => {
 										Contact
 									</Link>
 								</div>
-								<p className="py-4 text-xs text-center text-gray-500 flex items-center justify-center">
+								<p className="text-xs text-center text-gray-500 flex items-center justify-center">
 									Made with
 									<img
 										src="https://twemoji.maxcdn.com/svg/1f33f.svg"
@@ -162,7 +219,7 @@ const Layout = ({ children }) => {
 const MobileNav = ({ children, link, className = '', active = false }) => {
 	return (
 		<Link
-			as={link}
+			passHref
 			href={link}
 			className={`p-3 ${
 				active ? 'text-gray-900 ' : 'text-gray-400 '

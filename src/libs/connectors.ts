@@ -84,21 +84,21 @@ const ftmChain = {
 const polygonMumbaiTestnet = {
     id: 80001,
     name: 'Mumbai Testnet',
-    iconUrl: "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@bea1a9722a8c63169dcc06e86182bf2c55a76bbc/svg/color/matic.svg",
+    // iconUrl: "https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@bea1a9722a8c63169dcc06e86182bf2c55a76bbc/svg/color/matic.svg",
     network: 'polgon_mumbai',
-    nativeCurrency: {
-        decimals: 18,
-        name: 'MATIC',
-        symbol: 'MATIC',
-    },
+    // nativeCurrency: {
+    //     decimals: 18,
+    //     name: 'MATIC',
+    //     symbol: 'MATIC',
+    // },
     rpcUrls: {
         default: 'https://rpc-mumbai.maticvigil.com/',
     },
-    blockExplorers: {
-        default: { name: 'polygonscan', url: 'https://testnet.polygonscan.com' },
-        etherscan: { name: 'polygonscan', url: 'https://polygonscan.com/' },
-    },
-    testnet: true,
+    // blockExplorers: {
+    //     default: { name: 'polygonscan', url: 'https://testnet.polygonscan.com' },
+    //     etherscan: { name: 'polygonscan', url: 'https://polygonscan.com/' },
+    // },
+    // testnet: true,
 };
 
 const moonbeanChain = {
@@ -146,9 +146,9 @@ const moonriverChain = {
 
 export const { chains, provider } = configureChains(
     [
-        // chain.mainnet,
-        chain.polygon,
         polygonMumbaiTestnet
+        // chain.mainnet,
+        // chain.polygon,
     ],
     [jsonRpcProvider({ rpc: chain => ({ http: chain.rpcUrls.default }) })],
 

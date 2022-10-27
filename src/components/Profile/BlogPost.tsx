@@ -1,5 +1,4 @@
 import { createClient } from '@urql/core';
-import dayjs from 'dayjs';
 import { GetBlogPost } from 'graphql/queries';
 import { isEmpty } from 'libs/helpers';
 import { useRouter } from 'next/router';

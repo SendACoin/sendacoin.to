@@ -45,9 +45,28 @@ export const UserProfile = gql`
     }
   }
 `
+export const GetProfilesRevenueQuery = gql`
+  query GetProfilesRevenueQuery($request:  ProfileFollowRevenueQueryRequest!) {
+    profileFollowRevenue(request: $request){
+      revenues
+      {
+        total{
+          asset
+          {
+            name
+            symbol
+          }
+          value
+        }
+      }
+    }
+
+  }`
+
 
 export const GetProfilesQuery = gql`
-  query GetProfilesQuery($request: SingleProfileQueryRequest!) {
+  query GetProfilesQuery($request: SingleProfileQueryRequest! ) {
+
     profile(request: $request) {
     id
     name

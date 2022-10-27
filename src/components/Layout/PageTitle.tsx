@@ -1,6 +1,6 @@
 import Head from 'next/head';
 
-const PageTitle = ({ title }) => {
+const PageTitle = ({ title, ogImage = null }) => {
 	return (
 		<>
 			<Head>
@@ -21,19 +21,19 @@ const PageTitle = ({ title }) => {
 				/>
 				<meta name="keywords" content="blockchain, portfolio tracker, transaction analyze" />
 				<meta itemProp="name" content="Share you lens profile.! Collect payments!" />
-				<meta itemProp="image" content="https://sendacoin.to/assets/images/og_image.jpeg" />
+				<meta itemProp="image" content={ogImage ?? 'https://sendacoin.to/assets/images/og_image.jpeg'} />
 
 				{/* <!-- Twitter Card --> */}
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta name="twitter:creator" content="@Sendacoin_app" />
 				<meta name="twitter:site" content="@Sendacoin_app" />
-				<meta name="twitter:image" content="https://sendacoin.to/assets/images/og_image.jpeg" />
+				<meta name="twitter:image" content={ogImage ?? 'https://sendacoin.to/assets/images/og_image.jpeg'} />
 
 				{/* <!-- OpenGraph Card --> */}
 				<meta property="og:title" content="Share you lens profile. ! Collect payments!" />
 				<meta property="og:type" content="article" />
 				<meta property="og:url" content="https://sendacoin.to/" />
-				<meta property="og:image" content="https://sendacoin.to/assets/images/og_image.jpeg" />
+				<meta property="og:image" content={ogImage ?? 'https://sendacoin.to/assets/images/og_image.jpeg'} />
 				<meta
 					property="og:description"
 					content="Tip easily from sendacoin profile and tell everyone about your achievements."

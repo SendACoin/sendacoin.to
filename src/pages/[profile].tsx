@@ -9,20 +9,26 @@ import ENSProfile from 'components/Profile/Eth/ENSProfile';
 
 dayjs.extend(relativeTime);
 
-const Profile = () => {
-	const router = useRouter();
+const Profile = ({ profile }) => {
+	if (!profile) return null;
 
-	if (!router.query.profile) return null;
-
-	if (ethers.utils.isAddress(router.query.profile as string)) {
-		return <EthProfile profileAddress={router.query.profile} />;
+	if (ethers.utils.isAddress(profile as string)) {
+		return <EthProfile profileAddress={profile} />;
 	}
 
-	if (String(router.query.profile).endsWith('.eth')) {
-		return <ENSProfile ens={router.query.profile} />;
+	if (String(profile).endsWith('.eth')) {
+		return <ENSProfile ens={profile} />;
 	}
 
-	return <LensProfile profileId={router.query.profile} />;
+	return <LensProfile profileId={profile} />;
 };
+
+export async function getServerSideProps(context) {
+	return {
+		props: {
+			profile: context.query.profile,
+		},
+	};
+}
 
 export default Profile;

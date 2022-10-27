@@ -1,8 +1,5 @@
-import { useProvider } from 'wagmi';
-import { useAccount } from 'wagmi';
 import { abi } from 'constants/index';
 import { useContractRead } from 'wagmi';
-import { useState } from 'react';
 import { isEmpty, shortenAddress } from 'libs/helpers';
 import { ethers } from 'ethers';
 import { useQuery } from 'urql';
@@ -14,7 +11,7 @@ const FeedItem = ({ feed }) => {
 		query: UserProfile,
 		variables: {
 			request: {
-				ownedBy: feed[0],
+				ownedBy: feed['from'],
 			},
 		},
 	});
@@ -22,10 +19,10 @@ const FeedItem = ({ feed }) => {
 	return (
 		<div className="border bg-white rounded-lg p-2">
 			<div className="flex justify-between items-center">
-				<div className="text-sm">{shortenAddress(feed[0])}</div>
+				<div className="text-sm">{shortenAddress(feed['from'])}</div>
 
 				<span className="text-gray-900 mr-1 bg-gray-100 rounded p-1 border text-xs flex items-center">
-					{feed[1] ? String(ethers.utils.formatEther((feed[1] as any)._hex)) : '-'}
+					{feed['amount'] ? String(ethers.utils.formatEther((feed['amount'] as any)._hex)) : '-'}
 					<img
 						src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@bea1a9722a8c63169dcc06e86182bf2c55a76bbc/svg/color/matic.svg"
 						alt=""
@@ -34,16 +31,12 @@ const FeedItem = ({ feed }) => {
 				</span>
 			</div>
 
-			<p className="text-base">{feed[2]}</p>
+			<p className="text-base">{feed['message']}</p>
 		</div>
 	);
 };
 
 const Feed = ({ ownerAddress }) => {
-	const [feeds, setFeeds] = useState([]);
-
-	const provider = useProvider();
-	const { address, connector } = useAccount();
 	const { contractAddress } = useContractAddress();
 
 	const { data, isError, isLoading } = useContractRead({
@@ -60,18 +53,14 @@ const Feed = ({ ownerAddress }) => {
 			) : (
 				<>
 					{isEmpty(data) ? (
-						<>
-							<p className="text-gray-500 text-center text-sm">Your Tip{"'"}s Feed is Empty! </p>
-						</>
+						<p className="text-gray-500 text-center text-sm">Your Tip{"'"}s Feed is Empty! </p>
 					) : (
 						<>
 							{data && (
 								<>
-									{(data as [])?.map((feed) => (
-										<>
-											<FeedItem feed={feed} key={feed[0]} />
-										</>
-									))}
+									{(data as [])?.map((feed, index) => {
+										return <FeedItem feed={feed} key={feed['from'] + index} />;
+									})}
 								</>
 							)}
 						</>
