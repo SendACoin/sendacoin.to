@@ -41,6 +41,10 @@ const Tip = ({ name, ownerAddress }) => {
 				<ConnectButtonLink />
 			</div>
 
+			{process.env.NEXT_PUBLIC_TESTNET ? (
+				<span className="text-xs ml-1 border border-gray-300 text-gray-600 rounded-lg px-1.5">Testnet</span>
+			) : null}
+
 			<form
 				className="mt-5 relative"
 				onSubmit={(e) => {

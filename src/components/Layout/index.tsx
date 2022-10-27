@@ -36,12 +36,17 @@ const Layout = ({ children }) => {
 						<>
 							<header className="grid grid-cols-2 md:grid-cols-3 gap-5">
 								<div className="py-5 md:py-0">
-									<Link href="/" passHref>
+									<Link href="/" passHref className="flex items-center">
 										<img
 											src="https://sendacoin.to/assets/images/logo.svg"
 											className="w-32 pl-2 md:pl-0  md:w-32 md:h-32"
 											alt=""
 										/>
+										{process.env.NEXT_PUBLIC_TESTNET ? (
+											<span className="text-xs ml-1 border border-gray-300 text-gray-600 rounded-lg px-1.5">
+												Testnet
+											</span>
+										) : null}
 									</Link>
 								</div>
 
