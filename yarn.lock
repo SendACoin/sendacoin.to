@@ -1161,6 +1161,14 @@
   dependencies:
     "@mantine/utils" "5.5.5"
 
+"@mantine/prism@^5.6.2":
+  version "5.6.2"
+  resolved "https://registry.yarnpkg.com/@mantine/prism/-/prism-5.6.2.tgz#71927074e62c9c046a44aad43056914f9c15e460"
+  integrity sha512-lRv13zcI0SFmQ/iDs5VHSOHWvWfEr7Uq1i7fUeV9qwkEHuc0VpLXqgf+SqFdnOF3KNBX3qDDI7gVmrvAMxGWVQ==
+  dependencies:
+    "@mantine/utils" "5.6.2"
+    prism-react-renderer "^1.2.1"
+
 "@mantine/ssr@5.5.5":
   version "5.5.5"
   resolved "https://registry.yarnpkg.com/@mantine/ssr/-/ssr-5.5.5.tgz#101a2b9bb0949ee1b38082d8da2f8f6c86439ee0"
@@ -1181,6 +1189,11 @@
   version "5.5.5"
   resolved "https://registry.yarnpkg.com/@mantine/utils/-/utils-5.5.5.tgz#22b412b6e9d78f2515f9f98db3f5ed83deca91ca"
   integrity sha512-nt8+A0N1cV4cJNqlKuXazShoEwqtLohHNKFuywEdF3B6vHWdbY799PbT2WmqGTwNQ+se8y5/nBMmamBZrUN4fg==
+
+"@mantine/utils@5.6.2":
+  version "5.6.2"
+  resolved "https://registry.yarnpkg.com/@mantine/utils/-/utils-5.6.2.tgz#72ffa0e6c8a0c69554aa4c43b6f52663f87d785f"
+  integrity sha512-oWBVtewwIiqqKMCw8JahrHsDb1h68Eq878RWhnH+wOC1FOz1oV0ZXz0+5/gMUFZGss0duWEZXTVXafkBnD2HZA==
 
 "@metamask/detect-provider@^1.2.0":
   version "1.2.0"
@@ -5467,6 +5480,11 @@ prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.npmjs.org/prelude-ls/-/prelude-ls-1.2.1.tgz"
   integrity sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==
+
+prism-react-renderer@^1.2.1:
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/prism-react-renderer/-/prism-react-renderer-1.3.5.tgz#786bb69aa6f73c32ba1ee813fbe17a0115435085"
+  integrity sha512-IJ+MSwBWKG+SM3b2SUfdrhC+gu01QkV2KmRQgREThBfSQRoufqRfxfHUxpG1WcaFjP+kojcFyO9Qqtpgt3qLCg==
 
 process-nextick-args@~2.0.0:
   version "2.0.1"

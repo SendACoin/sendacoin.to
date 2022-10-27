@@ -15,6 +15,37 @@ export const HeaderVisibleRoutes = [
 	'/embed',
 ];
 
+const HeaderNavigation = [
+	{
+		link: '/',
+		label: 'Home',
+	},
+	{
+		link: '/explore',
+		label: 'Explore',
+	},
+	{
+		link: '/dashboard',
+		label: 'Dashboard',
+		authenticated: true,
+	},
+];
+
+const HeaderLink = ({ nav, active }) => {
+	return (
+		<Link
+			key={nav.link}
+			href={nav.link}
+			passHref
+			className={`hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer  ${
+				active ? 'bg-gray-100' : ''
+			}`}
+		>
+			{nav.label}
+		</Link>
+	);
+};
+
 const Layout = ({ children }) => {
 	const { address, isConnecting, isDisconnected } = useAccount();
 	const router = useRouter();
@@ -61,30 +92,27 @@ const Layout = ({ children }) => {
 
 								<div className="flex justify-end md:justify-start items-center md:col-span-2">
 									<nav className="hidden md:flex items-center bg-white border rounded-full px-2 py-2 space-x-2 shadow-sm ml-0 mr-0">
-										<Link
-											href="/"
-											passHref
-											className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer"
-										>
-											Home
-										</Link>
-										<Link
-											href="/explore"
-											passHref
-											className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer"
-										>
-											Explore
-										</Link>
-
-										{address ? (
-											<Link
-												href="/dashboard"
-												passHref
-												className="hover:bg-gray-100 font-bold text-gray-500 hover:text-gray-900 text-sm  px-4 py-2 rounded-full cursor-pointer"
-											>
-												Dashboard
-											</Link>
-										) : null}
+										{HeaderNavigation.map((nav) => {
+											if (nav.authenticated) {
+												if (address) {
+													return (
+														<HeaderLink
+															key={nav.link}
+															nav={nav}
+															active={router.asPath === nav.link}
+														/>
+													);
+												}
+											} else {
+												return (
+													<HeaderLink
+														key={nav.link}
+														nav={nav}
+														active={router.asPath === nav.link}
+													/>
+												);
+											}
+										})}
 
 										<ConnectButtonLink />
 									</nav>
