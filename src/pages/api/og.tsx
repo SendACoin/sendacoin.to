@@ -5,57 +5,116 @@ export const config = {
 	runtime: 'experimental-edge',
 };
 
+const formatImageUrl = (imageUrl, defaultPicture = null) => {
+	if (!imageUrl) return defaultPicture;
+
+	if (imageUrl.startsWith('ipfs://')) {
+		return `https://w3s.link/ipfs/${imageUrl.replace('ipfs://', '')}`;
+	}
+
+	return imageUrl;
+};
+
 const fetchUserDetails = async (username) => {
 	const user = await fetch('https://api.lens.dev/', {
-		body: '{"query":"query GetProfilesQuery($request: SingleProfileQueryRequest!) {\\n  profile(request: $request) {\\n    id\\n    name\\n    bio\\n    attributes {\\n      displayType\\n      traitType\\n      key\\n      value\\n      __typename\\n    }\\n    followNftAddress\\n    metadata\\n    isDefault\\n    picture {\\n      ... on NftImage {\\n        contractAddress\\n        tokenId\\n        uri\\n        verified\\n        __typename\\n      }\\n      ... on MediaSet {\\n        original {\\n          url\\n          mimeType\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    handle\\n    coverPicture {\\n      ... on NftImage {\\n        contractAddress\\n        tokenId\\n        uri\\n        verified\\n        __typename\\n      }\\n      ... on MediaSet {\\n        original {\\n          url\\n          mimeType\\n          __typename\\n        }\\n        __typename\\n      }\\n      __typename\\n    }\\n    ownedBy\\n    dispatcher {\\n      address\\n      canUseRelay\\n      __typename\\n    }\\n    stats {\\n      totalFollowers\\n      totalFollowing\\n      totalPosts\\n      totalComments\\n      totalMirrors\\n      totalPublications\\n      totalCollects\\n      __typename\\n    }\\n    followModule {\\n      ... on FeeFollowModuleSettings {\\n        type\\n        amount {\\n          asset {\\n            symbol\\n            name\\n            decimals\\n            address\\n            __typename\\n          }\\n          value\\n          __typename\\n        }\\n        recipient\\n        __typename\\n      }\\n      ... on ProfileFollowModuleSettings {\\n        type\\n        __typename\\n      }\\n      ... on RevertFollowModuleSettings {\\n        type\\n        __typename\\n      }\\n      __typename\\n    }\\n    __typename\\n  }\\n}","operationName":"GetProfilesQuery","variables":{"request":{"handle":"jijin.lens"}}}',
 		method: 'POST',
+		headers: {
+			'Accept-Encoding': 'gzip, deflate, br',
+			'Content-Type': 'application/json',
+			Accept: 'application/json',
+			Connection: 'keep-alive',
+			DNT: '1',
+			Origin: 'https://api.lens.dev',
+		},
+		body: JSON.stringify({
+			query: `{\n  profile(request: { handle: "${username}" }) {\n    handle\n    name\n    bio\n    picture {\n      ... on NftImage {\n        contractAddress\n        tokenId\n        uri\n        verified\n      }\n      ... on MediaSet {\n        original {\n          url\n          mimeType\n        }\n      }\n      __typename\n    }\n  }\n}\n`,
+		}),
 	});
 
 	const userData = await user.json();
 
-	console.log(userData);
-	return userData;
+	return await userData;
 };
 
 export default async function handler(req: NextRequest) {
 	const { searchParams } = req.nextUrl;
-	const username = searchParams.get('username');
 
-	// const userDetails = await fetchUserDetails(username);
+	const providedHandle = searchParams.get('handle');
 
-	if (!username) {
-		return new ImageResponse(<>Visit with &quot;?username=jijin.lens&quot;</>, {
+	if (!providedHandle) {
+		return new ImageResponse(<>Visit with &quot;?username=lens_handle&quot;</>, {
 			width: 1200,
 			height: 630,
 		});
 	}
 
+	const userDetails = await fetchUserDetails(providedHandle);
+
+	const { handle, bio, name, picture } = userDetails.data.profile;
+
+	const image = formatImageUrl(picture.original.url);
+
 	return new ImageResponse(
 		(
 			<div
+				tw="bg-gray-100 h-[90%] bg-white rounded-lg p-2"
 				style={{
 					display: 'flex',
 					fontSize: 60,
 					color: 'black',
-					background: '#f6f6f6',
 					width: '100%',
 					height: '100%',
-					paddingTop: 50,
-					flexDirection: 'column',
+					// paddingTop: 50,
+					flexDirection: 'row',
 					justifyContent: 'center',
 					alignItems: 'center',
 				}}
 			>
-				<img
-					width="256"
-					height="256"
-					src={`https://github.com/${username}.png`}
-					style={{
-						borderRadius: 128,
-					}}
-				/>
-				<p tw="bg-gray-50 px-5 rounded-lg py-1.5 border">sendacoin.to/{username}</p>
-				<p tw="">sendacoin.to/{username}</p>
+				<div
+					tw={`bg-gray-200 h-full flex-2 justify-center items-center rounded-lg`}
+					style={{ display: 'flex', flexDirection: 'column', background: '#fbf1dc' }}
+				>
+					<p
+						style={{
+							background: '#fff',
+							borderRadius: 128,
+							border: '20px solid #fff',
+							borderBottomRightRadius: '80px 80px',
+						}}
+					>
+						<img
+							width="256"
+							height="256"
+							tw={``}
+							src={`${image}`}
+							style={{
+								borderRadius: 128,
+							}}
+						/>
+					</p>
+				</div>
+				<div tw={'flex-3 pl-20 bg-white'} style={{ display: 'flex', flexDirection: 'column' }}>
+					<p tw={'mb-20'}>{name}</p>
+					<p tw={`text-gray-400 text-4xl mb-32`} style={{ marginTop: '-60px' }}>
+						@{handle}
+					</p>
+					<p tw="text-3xl mb-20" style={{ maxWidth: '500px', marginTop: '-90px' }}>
+						{bio}
+					</p>
+					<p
+						tw={`text-gray-900 text-4xl rounded-lg px-4 py-2 flex items-center gap-5`}
+						style={{ marginTop: '-40px', background: '#fbf1dc' }}
+					>
+						<img
+							src="https://sendacoin.to/assets/images/icon.svg"
+							width="40"
+							height="40"
+							style={{ marginRight: '20px' }}
+							alt=""
+						/>
+						<span>sendacoin.to/{handle}</span>
+					</p>
+				</div>
 			</div>
 		),
 		{
