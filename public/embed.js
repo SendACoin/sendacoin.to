@@ -42,7 +42,7 @@ const bubble_sact_button = !hide_sact_btn
 				: ''
 		}
 					<span style="tab-size: 4;font-family: inherit;line-height: inherit;cursor: pointer;color: inherit;box-sizing: border-box;border-width: 0;border-style: solid;border-color: #e5e7eb;--tw-ring-inset: var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width: 0px;--tw-ring-offset-color: #fff;--tw-ring-color: rgba(59, 130, 246, 0.5);--tw-ring-offset-shadow: 0 0 rgba(0,0,0,0);--tw-ring-shadow: 0 0 rgba(0,0,0,0);--tw-bg-opacity: 1;background-color: #f9e5d1;border-radius: 9999px;display: inline-flex;align-items: center;justify-content: center;height: 3.5rem;--tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0,0,0,0)), var(--tw-ring-shadow, 0 0 rgba(0,0,0,0)), var(--tw-shadow);width: 3.5rem; background:${button_color};">
-						<span className="text-xl font-medium leading-none text-white" style="position: relative;top: -1px;">
+						<span className="text-xl font-medium leading-none text-white">
 							<img src="${icon}" width="32px" height="32px" />
 						</span>
 					</span>

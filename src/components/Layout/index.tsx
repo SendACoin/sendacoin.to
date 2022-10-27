@@ -4,7 +4,16 @@ import { useRouter } from 'next/router';
 import { useAccount } from 'wagmi';
 import ConnectButtonLink from './ConnectButton';
 
-export const HeaderVisibleRoutes = ['/', '/dashboard', '/explore', '/thanks', '/feedback', '/privacy', '/contact'];
+export const HeaderVisibleRoutes = [
+	'/',
+	'/dashboard',
+	'/explore',
+	'/thanks',
+	'/feedback',
+	'/privacy',
+	'/contact',
+	'/embed',
+];
 
 const Layout = ({ children }) => {
 	const { address, isConnecting, isDisconnected } = useAccount();
@@ -90,7 +99,7 @@ const Layout = ({ children }) => {
 					{children}
 					{HeaderVisibleRoutes.includes(router.asPath) ? (
 						<>
-							<footer className="mt-8 py-4 pb-5 text-sm border-t border-gray-100 text-center text-gray-500 flex justify-between items-center">
+							<footer className="mt-8 py-4 pb-8 text-sm border-t border-gray-100 text-center text-gray-500 flex justify-between items-center">
 								<div className="md:space-x-5 space-y-2 md:space-y-0 grid grid-cols-2 md:flex items-center justify-center">
 									<Link
 										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
@@ -131,6 +140,13 @@ const Layout = ({ children }) => {
 									>
 										Analytics
 									</a>
+									<Link
+										href="/embed"
+										passHref
+										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
+									>
+										Embed
+									</Link>
 									<Link
 										href="/thanks"
 										passHref
