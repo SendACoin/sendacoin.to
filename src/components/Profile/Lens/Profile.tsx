@@ -1,30 +1,29 @@
-import { useRouter } from 'next/router';
-import { useQuery } from 'urql';
-import { GetProfilesQuery } from 'graphql/queries';
-import React, { useEffect, useState } from 'react';
 import { Tabs } from '@mantine/core';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import { GetProfilesQuery } from 'graphql/queries';
 import { formatImageUrl } from 'libs/helpers';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import Linkify from 'react-linkify';
+import { useQuery } from 'urql';
 
-import Settings from '../../../config';
+import PageTitle from 'components/Layout/PageTitle';
+import ShowNFTs from 'components/Profile/Lens/ShowNFTs';
+import ShowPost from 'components/Profile/Lens/ShowPost';
+import ShowSocialAccounts from 'components/Profile/Lens/ShowSocialAccounts';
+import Spinner from 'components/Spinner';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
-import PageTitle from 'components/Layout/PageTitle';
-import Spinner from 'components/Spinner';
-import ShowSocialAccounts from 'components/Profile/Lens/ShowSocialAccounts';
-import ShowPost from 'components/Profile/Lens/ShowPost';
-import ShowNFTs from 'components/Profile/Lens/ShowNFTs';
-import ProfileCard from '../ProfileCard';
-import Tip from '../Tip';
-import Feed from '../Feed';
-import ProfileFooter from '../ProfileFooter';
 import { useAccount } from 'wagmi';
-import ProfileTipsStats from '../ProfileTipsStats';
+import Settings from '../../../config';
 import BlogPost from '../BlogPost';
+import Feed from '../Feed';
+import ProfileCard from '../ProfileCard';
+import ProfileFooter from '../ProfileFooter';
+import ProfileTipsStats from '../ProfileTipsStats';
+import Tip from '../Tip';
 import ProfileRevenue from './ProfileRevenue';
-import Head from 'next/head';
 
 dayjs.extend(relativeTime);
 
@@ -47,17 +46,29 @@ const LensProfile = ({ profileId }) => {
 			if (result.data == undefined && result.fetching !== true) {
 				router.push('/');
 				toast.error('Profile not found');
-			}
-
-			if (result.data && result.data.profile) {
-				setProfile(result.data.profile);
+			} else {
+				if (result.data) {
+					if (result?.data?.profile === null) {
+						if (profileId.endsWith('.lens')) {
+							// router.push('/');
+							// toast.error('Profile not found');
+						} else {
+							router.push(`/${profileId}.lens`);
+						}
+					} else {
+						setProfile(result.data.profile);
+					}
+				}
 			}
 		}
 	}, [result]);
 
 	return (
 		<>
-			<PageTitle title={profileId} ogImage={`https://sendacoin.to/api/og?handle=${profileId}`} />
+			<PageTitle
+				title={profileId}
+				// ogImage={`https://sendacoin.to/api/og?handle=${profileId}`}
+			/>
 
 			<Spinner loading={profile ? false : true}>
 				{profile ? (

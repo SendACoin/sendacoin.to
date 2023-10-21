@@ -1,12 +1,12 @@
-import toast from 'react-hot-toast';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import Card from 'components/Layout/Card';
 import { ColorPicker, Switch, Table, TextInput } from '@mantine/core';
-import { Prism } from '@mantine/prism';
-import PageTitle from 'components/Layout/PageTitle';
 import { useForm } from '@mantine/form';
-import { useEffect, useMemo, useState } from 'react';
+import { Prism } from '@mantine/prism';
+import Card from 'components/Layout/Card';
+import PageTitle from 'components/Layout/PageTitle';
 import Script from 'next/script';
+import { useEffect, useState } from 'react';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import toast from 'react-hot-toast';
 
 const EmbedOptions = [
 	{
@@ -65,7 +65,7 @@ const Embed = () => {
 
 	const form = useForm({
 		initialValues: {
-			'data-username': 'Your_Lens_Handle',
+			'data-username': 'your_handle.lens',
 			'data-button-color': null,
 			'data-hide-bubble': null,
 			'data-hide-donate-text': null,

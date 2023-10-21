@@ -16,7 +16,7 @@ const ShowUrlBar = () => {
 					onChange={(e) => setHandle(e.target.value)}
 					className="px-1 py-4 text-gray-400"
 					style={{ outline: 0 }}
-					placeholder="your_lens_handle"
+					placeholder="your_handle.lens"
 				/>
 				<button
 					onClick={() => {
@@ -39,7 +39,7 @@ const ShowUrlBar = () => {
 				onChange={(e) => setHandle(e.target.value)}
 				className="px-1 py-4 text-gray-400"
 				style={{ outline: 0 }}
-				placeholder="your_lens_handle"
+				placeholder="your_handle.lens"
 			/>
 			<button
 				onClick={() => {

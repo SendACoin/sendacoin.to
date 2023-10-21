@@ -4,8 +4,6 @@ import RecommendedProfiles from 'components/Home/RecommendedProfiles';
 import ShowUrlBar from 'components/Home/ShowUrlBar';
 import PageTitle from 'components/Layout/PageTitle';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useState } from 'react';
 
 const Profiles = [
 	{
