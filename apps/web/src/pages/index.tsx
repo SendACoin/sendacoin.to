@@ -3,7 +3,6 @@ import { EyeOpenIcon, Share1Icon } from '@radix-ui/react-icons';
 import RecommendedProfiles from 'components/Home/RecommendedProfiles';
 import ShowUrlBar from 'components/Home/ShowUrlBar';
 import PageTitle from 'components/Layout/PageTitle';
-import Link from 'next/link';
 
 const Profiles = [
 	{
@@ -59,7 +58,7 @@ const Home = () => {
 					</section>
 					<div className="mt-20 grid">
 						<div className="flex -space-x-2 justify-center">
-							{Profiles.map((profile) => (
+							{/* {Profiles.map((profile) => (
 								<Link key={profile.handle} href={`/${profile.handle}`} passHref>
 									<img
 										className="inline-block h-14 md:h-20 md:w-20 rounded-full ring-2 ring-white hover:ring-gray-400"
@@ -67,7 +66,7 @@ const Home = () => {
 										alt=""
 									/>
 								</Link>
-							))}
+							))} */}
 						</div>
 					</div>
 				</div>

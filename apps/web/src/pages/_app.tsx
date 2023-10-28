@@ -1,43 +1,33 @@
-import { createClient, Provider } from 'urql';
-import Layout from 'components/Layout';
-import { createEmotionCache, MantineProvider } from '@mantine/core';
-import { RouterTransition } from '../components/Layout/RouterTransition';
-import { Toaster } from 'react-hot-toast';
+import { MantineProvider } from '@mantine/core';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import { chains, wagmiClient } from 'libs/connectors';
+import Layout from 'components/Layout';
+import { chains, wagmiConfig } from 'libs/connectors';
+import { Toaster } from 'react-hot-toast';
+import { Provider, createClient } from 'urql';
 import { WagmiConfig } from 'wagmi';
+import { RouterTransition } from '../components/Layout/RouterTransition';
 
 import 'react-tippy/dist/tippy.css';
 
 import '@rainbow-me/rainbowkit/styles.css';
-import '../styles/globals.css';
-import 'tailwindcss/tailwind.css';
 import Script from 'next/script';
+import 'tailwindcss/tailwind.css';
+import '../styles/globals.css';
 
 const client = createClient({
 	url: 'https://api.lens.dev',
 });
 
-const myCache = createEmotionCache({ key: 'sac' });
-
 function MyApp({ Component, pageProps }) {
 	return (
 		<Provider value={client}>
-			<MantineProvider
-				emotionCache={myCache}
-				withGlobalStyles
-				withNormalizeCSS
-				theme={{
-					/** Put your mantine theme override here */
-					colorScheme: 'light',
-				}}
-			>
+			<MantineProvider>
 				<Script async src="https://cdn.splitbee.io/sb.js" />
 
 				<Toaster containerClassName="text-sm" />
 
 				<RouterTransition />
-				<WagmiConfig client={wagmiClient}>
+				<WagmiConfig config={wagmiConfig}>
 					<RainbowKitProvider chains={chains} modalSize="compact" appInfo={{ appName: 'Sendacoin.to' }}>
 						<Layout>
 							<Component {...pageProps} />

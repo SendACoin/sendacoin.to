@@ -22,6 +22,7 @@ import Feed from '../Feed';
 import ProfileCard from '../ProfileCard';
 import ProfileFooter from '../ProfileFooter';
 import ProfileTipsStats from '../ProfileTipsStats';
+import { SuperFluidSubscribe } from '../SuperFluidSubscribe';
 import Tip from '../Tip';
 import ProfileRevenue from './ProfileRevenue';
 
@@ -141,6 +142,12 @@ const LensProfile = ({ profileId }) => {
 										profileAddress={profile.ownedBy}
 									/>
 								</div>
+
+								<SuperFluidSubscribe
+									user={{
+										public_address: profile.ownedBy,
+									}}
+								/>
 
 								<div className="gap-5 mb-8 px-2 md:px-5">
 									<Tabs color="dark" variant="pills" defaultValue="tip">

@@ -1,10 +1,10 @@
 import { contractAddresses } from 'constants/index';
-import { useProvider } from 'wagmi';
+import { useNetwork } from 'wagmi';
 
 const useContractAddress = () => {
-	const provider = useProvider();
+	const { chain, chains } = useNetwork();
 
-	const chainId = provider._network.chainId ?? 80001;
+	const chainId = chain.id ?? 80001;
 	const contractAddress = chainId in contractAddresses ? contractAddresses[chainId][0] : null;
 
 	return {

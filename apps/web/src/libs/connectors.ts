@@ -1,22 +1,15 @@
+
+import { getDefaultWallets } from '@rainbow-me/rainbowkit';
+import { configureChains, createConfig, mainnet } from 'wagmi';
+import { alchemyProvider } from 'wagmi/providers/alchemy';
+import { publicProvider } from 'wagmi/providers/public';
+
 import {
-    connectorsForWallets,
+    arbitrum,
+    optimism,
+    polygon
+} from 'wagmi/chains';
 
-} from '@rainbow-me/rainbowkit';
-
-import {
-    injectedWallet,
-    coinbaseWallet,
-    walletConnectWallet,
-    ledgerWallet,
-    trustWallet,
-    rainbowWallet
-} from '@rainbow-me/rainbowkit/wallets';
-
-import { configureChains } from 'wagmi';
-import { jsonRpcProvider } from 'wagmi/providers/jsonRpc'
-
-
-import { chain, createClient } from 'wagmi';
 
 const avalancheChain = {
     id: 43_114,
@@ -144,33 +137,29 @@ const moonriverChain = {
 
 
 
-export const { chains, provider } = configureChains(
+export const { chains, publicClient, webSocketPublicClient } = configureChains(
     [
-        polygonMumbaiTestnet
-        // chain.mainnet,
-        // chain.polygon,
+        polygon,
+        mainnet,
+        optimism,
+        arbitrum
     ],
-    [jsonRpcProvider({ rpc: chain => ({ http: chain.rpcUrls.default }) })],
-
+    [alchemyProvider({ apiKey: 'vCe1iltR1Ki4rpIgUttU9RFtEBXhCR38' }), publicProvider()]
 );
 
-export const connectors = connectorsForWallets([
-    {
-        groupName: 'Recommended',
-        wallets: [
-            injectedWallet({ chains }),
-            coinbaseWallet({ appName: 'App', chains }),
-            walletConnectWallet({ chains }),
-        ],
-    },
-    {
-        groupName: 'More',
-        wallets: [ledgerWallet({ chains }), trustWallet({ chains }), rainbowWallet({ chains })],
-    },
-]);
-
-export const wagmiClient = createClient({
-    autoConnect: true,
-    connectors,
-    provider,
+const { connectors } = getDefaultWallets({
+    appName: 'My RainbowKit App',
+    projectId: 'YOUR_PROJECT_ID',
+    // @ts-ignore
+    chains
 });
+
+
+
+
+export const wagmiConfig = createConfig({
+    autoConnect: true,
+    // @ts-ignore
+    connectors,
+    publicClient
+})

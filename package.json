@@ -1,56 +1,24 @@
 {
-  "name": "sendacoin",
-  "version": "0.1.0",
+  "name": "sendacoin-monorepo",
   "private": true,
+  "license": "MIT",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "engines": {
-    "npm": ">=8.0.0 <9.0.0",
-    "node": ">=16.0.0 <=18.12.1"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/server": "^11.10.0",
-    "@mantine/core": "^5.5.5",
-    "@mantine/form": "^5.5.5",
-    "@mantine/hooks": "^5.5.5",
-    "@mantine/next": "^5.5.5",
-    "@mantine/nprogress": "^5.5.5",
-    "@mantine/prism": "^5.6.2",
-    "@radix-ui/react-icons": "^1.1.1",
-    "@rainbow-me/rainbowkit": "^0.7.2",
-    "@tailwindcss/line-clamp": "^0.4.2",
-    "@vercel/og": "^0.0.19",
-    "boring-avatars": "^1.7.0",
-    "dayjs": "^1.11.5",
-    "ethers": "^5.7.1",
-    "ipfs-http-client": "^58.0.1",
-    "lens-protocol": "^0.1.5",
-    "moralis-v1": "^1.11.0",
-    "next": "^13.5.6",
-    "react": "18.2.0",
-    "react-copy-to-clipboard": "^5.1.0",
-    "react-dom": "18.2.0",
-    "react-hot-toast": "^2.4.0",
-    "react-linkify": "^1.0.0-alpha",
-    "react-markdown": "^8.0.3",
-    "react-moralis": "^1.4.2",
-    "react-tippy": "^1.4.0",
-    "urql": "^3.0.3",
-    "wagmi": "^0.7.5"
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "clean": "turbo clean",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "publish-tw": "turbo build --filter='@dub/tailwind-config' && cd packages/tailwind-config && npm publish && cd ../../",
+    "publish-ui": "turbo build --filter='@dub/ui' && cd packages/ui && npm publish && cd ../../",
+    "publish-utils": "turbo build --filter='@dub/utils' && cd packages/utils && npm publish && cd ../../",
+    "script": "echo 'Run this script in apps/web'"
   },
   "devDependencies": {
-    "@types/node": "18.11.0",
-    "@types/react": "^18.0.21",
-    "autoprefixer": "^10.4.12",
-    "eslint": "8.25.0",
-    "eslint-config-next": "12.3.1",
-    "postcss": "^8.4.18",
-    "tailwindcss": "^3.1.8",
-    "typescript": "4.8.4"
-  }
+    "eslint": "^8.48.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-organize-imports": "^3.2.3",
+    "prettier-plugin-tailwindcss": "^0.5.3",
+    "turbo": "^1.10.15"
+  },
+  "packageManager": "pnpm@8.6.10"
 }
