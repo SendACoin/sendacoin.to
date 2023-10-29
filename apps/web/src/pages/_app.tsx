@@ -1,18 +1,24 @@
 import { MantineProvider } from '@mantine/core';
 import { RainbowKitProvider } from '@rainbow-me/rainbowkit';
-import Layout from 'components/Layout';
 import { chains, wagmiConfig } from 'libs/connectors';
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'sonner';
 import { Provider, createClient } from 'urql';
 import { WagmiConfig } from 'wagmi';
 import { RouterTransition } from '../components/Layout/RouterTransition';
 
 import 'react-tippy/dist/tippy.css';
 
+import '@mantine/code-highlight/styles.css';
+import '@mantine/core/styles.css';
 import '@rainbow-me/rainbowkit/styles.css';
+import dynamic from 'next/dynamic';
 import Script from 'next/script';
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
+
+const Layout = dynamic(() => import('components/Layout'), {
+	ssr: false,
+});
 
 const client = createClient({
 	url: 'https://api.lens.dev',
@@ -24,7 +30,7 @@ function MyApp({ Component, pageProps }) {
 			<MantineProvider>
 				<Script async src="https://cdn.splitbee.io/sb.js" />
 
-				<Toaster containerClassName="text-sm" />
+				<Toaster />
 
 				<RouterTransition />
 				<WagmiConfig config={wagmiConfig}>

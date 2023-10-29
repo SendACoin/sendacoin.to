@@ -1,12 +1,12 @@
+import { CodeHighlightTabs } from '@mantine/code-highlight';
 import { ColorPicker, Switch, Table, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { Prism } from '@mantine/prism';
 import Card from 'components/Layout/Card';
 import PageTitle from 'components/Layout/PageTitle';
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 
 const EmbedOptions = [
 	{
@@ -45,7 +45,7 @@ const EmbedOptions = [
 export const CodeBlock = ({ code }) => {
 	return (
 		<>
-			<CopyToClipboard text={'#FFC546'} onCopy={() => toast.success('Code Copied')}>
+			<CopyToClipboard text={'#FFC546'} onCopy={() => toast('Code Copied')}>
 				<code className="block mb-5 bg-gray-800 rounded text-gray-300 p-2 text-sm">{code}</code>
 			</CopyToClipboard>
 		</>
@@ -91,24 +91,33 @@ const Embed = () => {
 			<PageTitle title="Embed Widget" />
 			<div className="mt-5">
 				<p className="mb-5">Include javascript code on your HTML page</p>
-				<Prism language="javascript">{`<script type="text/javascript" src="https://sendacoin.to/embed.js" ${generatedValue} ></script>`}</Prism>
+
+				<CodeHighlightTabs
+					code={[
+						{
+							fileName: 'index.html',
+							code: `<script type="text/javascript" src="https://sendacoin.to/embed.js" ${generatedValue} ></script>`,
+							language: 'html',
+						},
+					]}
+				/>
 
 				<h5 className="font-medium my-4">Options</h5>
 
-				<Table striped>
-					<tbody>
+				<Table>
+					<Table.Tbody>
 						{EmbedOptions.map((option) => (
-							<tr key={option.property}>
-								<td>
+							<Table.Tr key={option.property}>
+								<Table.Td>
 									{option.property}
 									<span className="border ml-2 px-1 py-.5 text-xs border-gray-400 rounded text-gray-500">
 										{option.type}
 									</span>
-								</td>
-								<td>
+								</Table.Td>
+								<Table.Td>
 									{option.description}. {'  '} {option.required ? '(required field)' : ''}
-								</td>
-								<td>
+								</Table.Td>
+								<Table.Td>
 									{option.type === 'hex code' ? (
 										<ColorPicker
 											swatchesPerRow={14}
@@ -148,10 +157,10 @@ const Embed = () => {
 											onChange={(e) => form.setFieldValue(option.property, e.target.value)}
 										/>
 									) : null}
-								</td>
-							</tr>
+								</Table.Td>
+							</Table.Tr>
 						))}
-					</tbody>
+					</Table.Tbody>
 				</Table>
 			</div>
 			{/* <div className="text-gray-500 mt-5 text-right">Click on the bubble to see widget live demo.</div> */}

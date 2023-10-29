@@ -7,7 +7,7 @@ import { publicProvider } from 'wagmi/providers/public';
 import {
     arbitrum,
     optimism,
-    polygon
+    polygon,
 } from 'wagmi/chains';
 
 

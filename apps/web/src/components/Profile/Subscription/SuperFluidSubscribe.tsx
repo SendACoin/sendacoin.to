@@ -1,5 +1,7 @@
-import superTokenList from '@superfluid-finance/tokenlist';
 import SuperfluidWidget from '@superfluid-finance/widget';
+import paymentOptions from './paymentOptions';
+
+import superTokenList from '@superfluid-finance/tokenlist';
 
 export const SuperFluidSubscribe = ({ user }: any) => {
 	const walletManager = {
@@ -9,33 +11,22 @@ export const SuperFluidSubscribe = ({ user }: any) => {
 		isOpen: false,
 	};
 
-	const customPaymentDetails = [
-		{
-			chainId: 137,
+	const customPaymentDetails = paymentOptions.map((option) => {
+		return {
+			...option,
 			receiverAddress: user.public_address,
-			superToken: {
-				address: '0x32cefdf2b3df73bdebaa7cd3b0135b3a79d28dcc',
-			},
-			flowRate: {
-				amountEther: '1',
-				period: 'month',
-			},
-		},
-	];
+		};
+	});
 
 	return (
 		<>
 			<SuperfluidWidget
-				productDetails={{
-					name: profile?.name,
-					description: profile?.bio ?? '',
-					successURL: '',
-				}}
+				productDetails={{ name: `Buy coffee for ${name}`, description: 'Subscription' }}
 				paymentDetails={{
 					paymentOptions: customPaymentDetails,
 				}}
 				tokenList={superTokenList}
-				type="dialog"
+				type="drawer"
 				walletManager={walletManager}
 				stepper={{
 					orientation: 'horizontal',

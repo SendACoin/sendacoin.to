@@ -1,40 +1,9 @@
 import { Button } from '@mantine/core';
 import { EyeOpenIcon, Share1Icon } from '@radix-ui/react-icons';
+import CreatorAvatars from 'components/Home/CreatorAvatars';
 import RecommendedProfiles from 'components/Home/RecommendedProfiles';
 import ShowUrlBar from 'components/Home/ShowUrlBar';
 import PageTitle from 'components/Layout/PageTitle';
-
-const Profiles = [
-	{
-		handle: 'nader.lens',
-		picture:
-			'https://ik.imagekit.io/lensterimg/tr:n-avatar,tr:di-placeholder.webp/https://lens.infura-ipfs.io/ipfs/QmVBfhfgfhGsRVxTNURVUgceqyzjdVe11ic5rCghmePuKX',
-	},
-	{
-		handle: 'jijin.lens',
-		picture: 'https://w3s.link/ipfs/bafkreiemxxeevwcvcoue46kznrvoyxy54isl5wleoaami65h4efcwhqvnu',
-	},
-	{
-		handle: 'suhailkakar.lens',
-		picture:
-			'https://ik.imagekit.io/lensterimg/tr:n-avatar,tr:di-placeholder.webp/https://lens.infura-ipfs.io/ipfs/QmX8T8h9MMAajTvveXFaBFjWtvp4eY6j6wybjbCjxDDJdB',
-	},
-	{
-		handle: 'francescociulla.lens',
-		picture:
-			'https://ik.imagekit.io/lensterimg/tr:n-avatar,tr:di-placeholder.webp/https://lens.infura-ipfs.io/ipfs/bafkreidflmdyx2bqpvb54oaycb42v2akfgi4co7hqirj5ioiduhadgdzui',
-	},
-	{
-		handle: 'yoginth.lens',
-		picture:
-			'https://ik.imagekit.io/lensterimg/tr:n-avatar,tr:di-placeholder.webp/https://lens.infura-ipfs.io/ipfs/bafkreigjqdyocpvvzll67qoxhtyrookt37rx76mzn22cn6ahlw46rga3ie',
-	},
-	{
-		handle: 'nilesh.lens',
-		picture:
-			'https://ik.imagekit.io/lensterimg/tr:n-avatar,tr:di-placeholder.webp/https://lens.infura-ipfs.io/ipfs/bafkreifequ734mu7gu4oauwzo2q7z3ccazdz4n3evmvxgixynd3l3soix4',
-	},
-];
 
 const Home = () => {
 	return (
@@ -52,22 +21,13 @@ const Home = () => {
 							<div className="space-x-5 flex items-center uppercase mt-2 mb-5">
 								<p className="text-gray-500 text-xs pl-2">0% commission!</p>
 								<p className="text-gray-500 text-xs pl-2">Instant Transfer</p>
+								{/* <p className="text-gray-500 text-xs pl-2">Subscription Payment</p> */}
 							</div>
 							<ShowUrlBar />
 						</div>
 					</section>
-					<div className="mt-20 grid">
-						<div className="flex -space-x-2 justify-center">
-							{/* {Profiles.map((profile) => (
-								<Link key={profile.handle} href={`/${profile.handle}`} passHref>
-									<img
-										className="inline-block h-14 md:h-20 md:w-20 rounded-full ring-2 ring-white hover:ring-gray-400"
-										src={profile.picture}
-										alt=""
-									/>
-								</Link>
-							))} */}
-						</div>
+					<div className="mt-20 relative w-full">
+						<CreatorAvatars />
 					</div>
 				</div>
 

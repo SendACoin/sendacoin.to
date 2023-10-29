@@ -33,8 +33,8 @@ const ProfileTipsStats = ({ ownerAddress }) => {
 			<span>
 				<span className="text-gray-900 mr-1">
 					{!isLoading && !isError
-						? (data as any)._hex
-							? String(formatNumber(ethers.utils.formatEther((data as any)._hex)))
+						? (data as any)?._hex
+							? String(formatNumber(ethers.utils.formatEther((data as any)?._hex)))
 							: '-'
 						: '-'}
 				</span>
@@ -43,8 +43,8 @@ const ProfileTipsStats = ({ ownerAddress }) => {
 			<span>
 				<span className="text-gray-900 mr-1">
 					{!isReceivedLoading && !isReceivedError
-						? (received as any)._hex
-							? String(formatNumber(ethers.utils.formatEther((received as any)._hex)))
+						? (received as any)?._hex
+							? String(formatNumber(ethers.utils.formatEther((received as any)?._hex)))
 							: '-'
 						: '-'}{' '}
 				</span>

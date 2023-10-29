@@ -2,15 +2,12 @@ import { Button, NumberInput, Textarea } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import ConnectButtonLink from 'components/Layout/ConnectButton';
 import { abi } from 'constants/index';
-import { useContractWrite, useProvider } from 'wagmi';
 import { ethers } from 'ethers';
-import { useAccount } from 'wagmi';
-import Owner from './Owner';
 import useContractAddress from 'hooks/useContractAddress';
+import { useAccount, useContractWrite } from 'wagmi';
+import Owner from './Owner';
 
 const Tip = ({ name, ownerAddress }) => {
-	const provider = useProvider();
-
 	const { address, connector } = useAccount();
 
 	const { contractAddress } = useContractAddress();

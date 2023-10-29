@@ -1,22 +1,29 @@
 import { gql } from 'urql';
 
 export const RecommendProfiles = gql`
-  query RecommendedProfiles {
-    recommendedProfiles{
+  query RecommendedProfiles($request: ProfileQueryRequest!) {
+    profiles(request: $request)
+    {
+      items {
         id
         name
         bio
-        picture {
-          ... on MediaSet {
-            original {
-              url
-            }
-          }
-        }
         handle
-        stats {
-          totalFollowers
-        }
+        picture {
+        ... on NftImage {
+        contractAddress
+        tokenId
+        uri
+        verified
+      }
+      ... on MediaSet {
+        original {
+          url
+          mimeType
+        	}
+      	}
+      }
+      }
     }
   }
 `

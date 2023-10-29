@@ -1,7 +1,7 @@
 import { CopyIcon, TwitterLogoIcon } from '@radix-ui/react-icons';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { toast } from 'sonner';
 
 const ShareButton = ({ name, url }) => {
 	return (
@@ -40,7 +40,7 @@ const Owner = () => {
 					name="twitter"
 					url={`https://twitter.com/intent/tweet?text=Hey%20%0A%0Ahttps%3A%2F%2Fsendacoin.to${router.asPath}`}
 				/>
-				<CopyToClipboard text={`https://sendacoin.to${router.asPath}`} onCopy={() => toast.success('Copied!')}>
+				<CopyToClipboard text={`https://sendacoin.to${router.asPath}`} onCopy={() => toast('Copied!')}>
 					<a
 						onClick={() => {}}
 						type="button"

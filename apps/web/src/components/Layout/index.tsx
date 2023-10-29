@@ -22,7 +22,7 @@ const HeaderNavigation = [
 	},
 	{
 		link: '/explore',
-		label: 'Explore',
+		label: 'Creators',
 	},
 	{
 		link: '/dashboard',
@@ -54,7 +54,13 @@ const Layout = ({ children }) => {
 		<>
 			<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 
-			<div className={router.asPath === '/' ? 'main-section md:min-h-screen' : 'bg-gray-50 min-h-screen'}>
+			<div
+				className={
+					router.asPath === '/'
+						? 'main-section md:min-h-screen bg-[#f3eee3] pb-5'
+						: 'bg-[#f3eee3] min-h-screen'
+				}
+			>
 				{HeaderVisibleRoutes.includes(router.asPath) && address ? (
 					<div className="grid grid-cols-7 w-full z-50 fixed md:hidden bottom-0 p-1 border-t border-gray-200 bg-white shadow dark:bg-brand-primary ">
 						<MobileNav
@@ -71,7 +77,7 @@ const Layout = ({ children }) => {
 					</div>
 				) : null}
 
-				<div className="mx-auto max-w-screen-xl px-1 md:px-4 sm:px-6 relative ">
+				<div className="mx-auto max-w-screen-xl px-1 md:px-4 sm:px-6 relative">
 					{HeaderVisibleRoutes.includes(router.asPath) ? (
 						<>
 							<header className="grid grid-cols-2 md:grid-cols-3 gap-5">
@@ -79,7 +85,7 @@ const Layout = ({ children }) => {
 									<Link href="/" passHref className="flex items-center">
 										<img
 											src="https://sendacoin.to/assets/images/logo.svg"
-											className="w-32 pl-2 md:pl-0  md:w-32 md:h-32"
+											className="w-32 pl-2 md:pl-0  md:w-56 md:h-32"
 											alt=""
 										/>
 									</Link>
@@ -122,7 +128,7 @@ const Layout = ({ children }) => {
 					{children}
 					{HeaderVisibleRoutes.includes(router.asPath) ? (
 						<>
-							<footer className="mt-8 py-4 pb-8 text-sm border-t border-gray-100 text-center text-gray-500 flex justify-between items-center">
+							<footer className="mt-8 py-4 text-sm border-t border-gray-100 text-center text-gray-500 flex justify-between items-center bg-white rounded-2xl p-5">
 								<div className="md:space-x-5 space-y-2 md:space-y-0 grid grid-cols-2 md:flex items-center justify-center">
 									<Link
 										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"

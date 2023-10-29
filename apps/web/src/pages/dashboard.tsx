@@ -1,14 +1,14 @@
 import Card from 'components/Layout/Card';
+import PageTitle from 'components/Layout/PageTitle';
 import { abi } from 'constants/index';
 import { ethers } from 'ethers';
 import { UserProfile } from 'graphql/queries';
-import { formatNumber, isEmpty, shortenAddress } from 'libs/helpers';
-import { useQuery } from 'urql';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import toast from 'react-hot-toast';
-import { useAccount, useContractRead } from 'wagmi';
-import PageTitle from 'components/Layout/PageTitle';
 import useContractAddress from 'hooks/useContractAddress';
+import { formatNumber, isEmpty, shortenAddress } from 'libs/helpers';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { toast } from 'sonner';
+import { useQuery } from 'urql';
+import { useAccount, useContractRead } from 'wagmi';
 
 const StatsCard = ({ label, value }) => {
 	return (
@@ -56,7 +56,7 @@ const FeedItem = ({ feed }) => {
 				>
 					View on polygonscan
 				</a>
-				<CopyToClipboard text={feed[0]} onCopy={() => toast.success('Copied!')}>
+				<CopyToClipboard text={feed[0]} onCopy={() => toast('Copied!')}>
 					<a className="text-sm cursor-pointer text-gray-500 hover:text-gray-900">Copy address</a>
 				</CopyToClipboard>
 			</div>

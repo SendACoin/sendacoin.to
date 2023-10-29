@@ -14,7 +14,7 @@ import ShowPost from 'components/Profile/Lens/ShowPost';
 import ShowSocialAccounts from 'components/Profile/Lens/ShowSocialAccounts';
 import Spinner from 'components/Spinner';
 import Image from 'next/image';
-import toast from 'react-hot-toast';
+import { toast } from 'sonner';
 import { useAccount } from 'wagmi';
 import Settings from '../../../config';
 import BlogPost from '../BlogPost';
@@ -22,7 +22,6 @@ import Feed from '../Feed';
 import ProfileCard from '../ProfileCard';
 import ProfileFooter from '../ProfileFooter';
 import ProfileTipsStats from '../ProfileTipsStats';
-import { SuperFluidSubscribe } from '../SuperFluidSubscribe';
 import Tip from '../Tip';
 import ProfileRevenue from './ProfileRevenue';
 
@@ -46,13 +45,13 @@ const LensProfile = ({ profileId }) => {
 		if (result && router.isReady) {
 			if (result.data == undefined && result.fetching !== true) {
 				router.push('/');
-				toast.error('Profile not found');
+				toast('Profile not found');
 			} else {
 				if (result.data) {
 					if (result?.data?.profile === null) {
 						if (profileId.endsWith('.lens')) {
 							// router.push('/');
-							// toast.error('Profile not found');
+							// toast('Profile not found');
 						} else {
 							router.push(`/${profileId}.lens`);
 						}
@@ -143,16 +142,17 @@ const LensProfile = ({ profileId }) => {
 									/>
 								</div>
 
-								<SuperFluidSubscribe
+								{/* <SuperFluidSubscribe
 									user={{
 										public_address: profile.ownedBy,
+										name: profile.name,
 									}}
-								/>
+								/> */}
 
 								<div className="gap-5 mb-8 px-2 md:px-5">
 									<Tabs color="dark" variant="pills" defaultValue="tip">
 										<div className="grid place-items-center">
-											<Tabs.List>
+											<Tabs.List color="dark">
 												<Tabs.Tab value="tip">
 													{address == profile.ownedBy ? 'About' : 'Tip'}
 												</Tabs.Tab>
