@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 const client = createClient({
 	url: 'https://arweave.net/graphql',
+	exchanges: [],
 });
 
 const Post = ({ postId }) => {

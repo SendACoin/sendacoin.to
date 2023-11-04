@@ -1,0 +1,38 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/SacPayments.sol": {
+      "content": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.7;\n\nimport \"./interfaces/IPUSHCommInterface.sol\";\n\n/* Errors */\nerror Payments_ZeroBalance();\n\n\ncontract SacPayments {\n\n    event NewTips(\n        address indexed from,\n        address indexed to,\n        uint256 timestamp,\n        string message\n    );\n\n    struct TipInfo {\n        address from;\n        uint256 amount;\n        string message;\n        uint256 timestamp;\n    }\n\n    mapping(address => TipInfo[]) public profiles;\n    mapping(address => uint256) public totalReceived;\n    mapping(address => uint256) public totalDonated;\n\n    function tip(address payable tipAddress, string memory message) public payable {\n        if(msg.value < 0)\n        {\n            revert Payments_ZeroBalance();\n        }\n\n        profiles[tipAddress].push(TipInfo(msg.sender, msg.value, message, block.timestamp));\n\n        totalReceived[tipAddress] += msg.value;\n        totalDonated[msg.sender] += msg.value;\n\n        tipAddress.transfer(msg.value);\n\n        emit NewTips(\n            msg.sender,\n            tipAddress,\n            block.timestamp,\n            message\n        );\n\n    //     IPUSHCommInterface(\"0xb3971BCef2D791bc4027BbfedFb47319A4AAaaAa\").sendNotification(\n    //     YOUR_CHANNEL_ADDRESS,\n    //     tipAddress,\n    //     bytes(\n    //         string(\n    //             abi.encodePacked(\n    //                 \"0\",\n    //                 \"+\",\n    //                 \"3\",\n    //                 \"+\",\n    //                 \"You have received a tip - Sendacoin\",\n    //                 \"+\",\n    //                 \"You have received a tip from x Address - Y amount\"\n    //             )\n    //         )\n    //     )\n    // );\n\n    }\n\n\n    function getTipsHistory(address userAddress ) public view returns (TipInfo[] memory){\n            uint256 length = profiles[userAddress].length;\n\n            TipInfo[] memory ret = new TipInfo[](length);\n\n            for (uint i = 0; i < length; i++) {\n                ret[i] = profiles[userAddress][i];\n            }\n\n            return ret;\n    }\n\n}\n"
+    },
+    "contracts/interfaces/IPUSHCommInterface.sol": {
+      "content": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.7;\n\ninterface IPUSHCommInterface {\n    function sendNotification(address _channel, address _recipient, bytes calldata _identity) external;\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { NavigationProgress, completeNavigationProgress, startNavigationProgress } from '@mantine/nprogress';
 import { useRouter } from 'next/router';
-import { startNavigationProgress, completeNavigationProgress, NavigationProgress } from '@mantine/nprogress';
+import { useEffect } from 'react';
 
 export function RouterTransition() {
 	const router = useRouter();
@@ -20,5 +20,5 @@ export function RouterTransition() {
 		};
 	}, [router.asPath]);
 
-	return <NavigationProgress color={'yellow'} autoReset={true} />;
+	return <NavigationProgress color={'yellow'} />;
 }

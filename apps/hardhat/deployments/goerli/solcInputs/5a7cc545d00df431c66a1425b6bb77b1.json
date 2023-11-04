@@ -1,0 +1,35 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/SacPayments.sol": {
+      "content": "// SPDX-License-Identifier: MIT\n\npragma solidity ^0.8.7;\n\n\n\n/* Errors */\n\nerror Payments_AmntLessMin();\n\ncontract SacPayments {\n\n    mapping(address => mapping(address => uint256)) public profiles;\n\n    mapping(address => uint256) public totalReceived;\n    mapping(address => uint256) public totalDonated;\n\n    function tip(address payable tipAddress) public payable {\n\n        profiles[tipAddress][msg.sender] = msg.value;\n\n\n        totalReceived[tipAddress] += msg.value;\n        totalDonated[msg.sender] += msg.value;\n        tipAddress.transfer(msg.value);\n\n    }\n\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

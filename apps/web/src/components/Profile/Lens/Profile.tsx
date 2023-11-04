@@ -13,7 +13,6 @@ import ShowNFTs from 'components/Profile/Lens/ShowNFTs';
 import ShowPost from 'components/Profile/Lens/ShowPost';
 import ShowSocialAccounts from 'components/Profile/Lens/ShowSocialAccounts';
 import Spinner from 'components/Spinner';
-import Image from 'next/image';
 import { toast } from 'sonner';
 import { useAccount } from 'wagmi';
 import Settings from '../../../config';
@@ -90,7 +89,7 @@ const LensProfile = ({ profileId }) => {
 									}}
 								>
 									<div className="absolute avatar_wrapper" style={{ right: '38%', top: '45px' }}>
-										<Image
+										<img
 											src={`${formatImageUrl(
 												profile.picture?.original?.url,
 												Settings.defaultProfilePicture

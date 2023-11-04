@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { Button, NumberInput, Textarea } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import ConnectButtonLink from 'components/Layout/ConnectButton';
@@ -72,7 +74,7 @@ const Tip = ({ name, ownerAddress }) => {
 						/> */}
 
 						<NumberInput
-							icon={
+							rightSection={
 								<img
 									src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@bea1a9722a8c63169dcc06e86182bf2c55a76bbc/svg/color/matic.svg"
 									alt=""
@@ -84,10 +86,9 @@ const Tip = ({ name, ownerAddress }) => {
 							min={0.0001}
 							className="col-span-8"
 							onChange={(val) => {
-								form.setFieldValue('amount', val);
+								form.setFieldValue('amount', Number(val));
 							}}
 							hideControls
-							noClampOnBlur
 						/>
 					</div>
 
@@ -101,7 +102,7 @@ const Tip = ({ name, ownerAddress }) => {
 						color="dark"
 						variant="outline"
 						fullWidth
-						rightIcon={<img className="w-4 h-4" src="https://twemoji.maxcdn.com/svg/1f64c.svg" />}
+						rightSection={<img className="w-4 h-4" src="https://twemoji.maxcdn.com/svg/1f64c.svg" />}
 					>
 						Tip
 					</Button>
