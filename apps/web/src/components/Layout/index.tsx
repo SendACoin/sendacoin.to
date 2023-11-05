@@ -84,7 +84,7 @@ const Layout = ({ children }) => {
 								<div className="py-5 md:py-0">
 									<Link href="/" passHref className="flex items-center">
 										<img
-											src="https://sendacoin.to/assets/images/logo.svg"
+											src="/assets/images/logo.svg"
 											className="w-32 pl-2 md:pl-0  md:w-56 md:h-32"
 											alt=""
 										/>
