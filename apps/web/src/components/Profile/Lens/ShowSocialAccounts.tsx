@@ -1,4 +1,4 @@
-import { GlobeIcon, Link1Icon, Link2Icon, TwitterLogoIcon } from '@radix-ui/react-icons';
+import { Link2Icon } from '@radix-ui/react-icons';
 import { formatUrl } from 'libs/helpers';
 import React from 'react';
 
@@ -37,9 +37,9 @@ const ShowSocialAccounts = ({ attributes = [], profileId = null, profileAddress 
 												className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 px-2 py-2 rounded-lg"
 												target="_BLANK"
 												rel="noopener noreferrer"
-												href={`https://lenster.xyz/u/${profileId}`}
+												href={`https://hey.xyz/u/${profileId.replace('.lens', '')}`}
 											>
-												<img src="/assets/images/lenster.svg" className="w-4 h-4" alt="" />
+												<img src="/assets/images/hey.png" className="w-4 h-4" alt="" />
 											</a>
 										),
 									}[attribute.key]
@@ -51,9 +51,9 @@ const ShowSocialAccounts = ({ attributes = [], profileId = null, profileAddress 
 						className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 px-2 py-2 rounded-lg"
 						target="_BLANK"
 						rel="noopener noreferrer"
-						href={`https://lenstube.xyz/${profileId}`}
+						href={`https://tape.xyz/u/${profileId.replace('.lens', '')}`}
 					>
-						<img src="/assets/images/lenstube.svg" className="w-4 h-4" alt="" />
+						<img src="/assets/images/tape.svg" className="w-4 h-4" alt="" />
 					</a>
 				</>
 			) : null}

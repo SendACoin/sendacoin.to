@@ -137,14 +137,7 @@ const Layout = ({ children }) => {
 									>
 										Feedback
 									</Link>
-									<a
-										href="https://discord.gg/F27NTNP9"
-										target="_BLANK"
-										rel="noopener noreferrer"
-										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
-									>
-										Discord
-									</a>
+
 									<a
 										href="https://sendacoin.to/jijin.lens"
 										target="_BLANK"
@@ -160,14 +153,6 @@ const Layout = ({ children }) => {
 										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
 									>
 										Github
-									</a>
-									<a
-										href="https://app.splitbee.io/public/sendacoin.to"
-										target="_BLANK"
-										rel="noreferrer"
-										className="px-2 text-gray-500 hover:text-gray-900 cursor-pointer"
-									>
-										Analytics
 									</a>
 									<Link
 										href="/embed"
