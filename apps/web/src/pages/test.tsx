@@ -1152,8 +1152,8 @@ const Test = () => {
 	const { data, error } = useContractRead({
 		address: '0x9a87A43Ac0B50984cd20964CB4978E6D9B3CBe5D',
 		abi: abi,
-		functionName: 'baseURI',
-		args: [],
+		functionName: 'tokenURI',
+		args: ['1'],
 	});
 
 	console.log(data, error);
